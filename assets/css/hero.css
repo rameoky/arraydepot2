@@ -1,0 +1,168 @@
+/* ==========================================================================
+   ARRAY DEPOT --- NEW STATIC BRUTALIST HERO SECTION STYLES
+   ========================================================================== */
+
+#hero-section {
+  position: sticky;
+  top: 26px; /* Sticks just below the 26px sticky header */
+  width: 100%;
+  height: calc(var(--hero-logo-height) + 16px); /* Adaptive height to content size */
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 8px;
+  padding-bottom: 8px; /* Balanced padding */
+  overflow: hidden;
+  z-index: 1; /* Below about section */
+  transition: background-color 0.2s ease;
+  
+  /* Hero Sizing Variables (Pure CSS Responsive Math) */
+  --hero-logo-height: 41.5vw;
+  --hero-font-size: max(calc(var(--hero-logo-height) * 0.0615), 12px);
+}
+
+@media (max-width: 768px) {
+  #hero-section {
+    --hero-logo-height: 38vw;
+    --hero-font-size: max(calc(var(--hero-logo-height) * 0.058), 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  #hero-section {
+    --hero-logo-height: 34vw;
+    --hero-font-size: max(calc(var(--hero-logo-height) * 0.052), 9px);
+  }
+}
+
+
+
+.hero-container {
+  display: flex;
+  justify-content: flex-start; /* Group logo and text next to each other */
+  gap: 8px; /* Strict 8px gap */
+  align-items: stretch; /* Stretch to have the same height */
+  width: 100%;
+  max-width: 100%;
+  padding: 0 8px; /* 8px side padding to preserve page margins */
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT COLUMN: Main Vertical Logo
+   -------------------------------------------------------------------------- */
+
+.hero-logo-container {
+  display: flex;
+  align-items: center; /* Center vertically to align centers */
+  width: calc(var(--hero-logo-height) * 1.4146);
+  flex-shrink: 0;
+}
+
+.hero-logo-svg {
+  height: var(--hero-logo-height);
+  width: 100%;
+  display: block;
+}
+
+.hero-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes top block to top, bottom to bottom (framing the logo) */
+  padding: 0;
+  flex-shrink: 0;
+  width: max-content;
+}
+
+/* Top Information Block (line-height: 80% / 0.8) */
+.info-top-block {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+
+.info-line {
+  font-family: 'PP Neue York Normal', serif;
+  font-weight: 500;
+  font-size: var(--hero-font-size, 16px);
+  letter-spacing: -0.03em;
+  line-height: 0.8; /* 80% line-height */
+  text-transform: uppercase;
+  color: var(--text-color);
+  transition: color 0.2s ease;
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+/* Bottom Stats Block */
+.info-bottom-block {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--hero-font-size, 16px) * 0.5); /* Vertical spacing scales with font size */
+  width: max-content;
+}
+
+.stat-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: var(--hero-font-size, 16px);
+  letter-spacing: -0.03em;
+  line-height: 0.8; /* 80% line-height */
+  text-transform: uppercase;
+  color: var(--text-color);
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.stat-value {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: var(--hero-font-size, 16px);
+  letter-spacing: -0.03em;
+  line-height: 0.8; /* 80% line-height */
+  text-transform: uppercase;
+  color: var(--text-color);
+  display: flex;
+  align-items: flex-end;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   ODOMETER SLIDE-UP COUNTER STYLES
+   -------------------------------------------------------------------------- */
+
+.digit-container {
+  display: inline-block;
+  height: 0.8em;
+  line-height: 0.8em;
+  overflow: hidden;
+  vertical-align: bottom;
+  position: relative;
+}
+
+.digit-strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.digit-strip span {
+  display: block;
+  height: 0.8em;
+  line-height: 0.8em;
+  text-align: center;
+}
+
+/* Space formatting inside the odometer values */
+.odometer-space {
+  display: inline-block;
+  width: 0.25em; /* Scaled space width */
+  height: 0.8em;
+  vertical-align: bottom;
+}

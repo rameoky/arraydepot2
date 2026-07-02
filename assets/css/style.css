@@ -1,0 +1,1945 @@
+/* ==========================================================================
+   ARRAY DEPOT --- CLEAN DESIGN HEADER STYLE SHEET
+   ========================================================================== */
+
+/* Load only PP Neue York Condensed Medium & Extrabold, and PP Neue York Normal Medium */
+@font-face {
+  font-family: 'PP Neue York Condensed';
+  src: url('../Font/PPNeueYork-CondensedMedium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PP Neue York Condensed';
+  src: url('../Font/PPNeueYork-CondensedExtrabold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PP Neue York Normal';
+  src: url('../Font/PPNeueYork-NormalMedium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --btn-bg: #f3f3f3;
+  --btn-hover: #e5e5e5;
+  --auth-bg: #000000;
+  --auth-text: #ffffff;
+  --auth-icon-bg: #ffffff;
+  --auth-icon-fill: #000000;
+  /* Map button (VIEW CLOSEST DEPOT): black bg + white graphics in light mode */
+  --map-btn-bg: #000000;
+  --map-btn-fg: #ffffff;
+}
+
+body.dark-theme {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --btn-bg: #1c1c1c;
+  --btn-hover: #2d2d2d;
+  --auth-bg: #ffffff;
+  --auth-text: #000000;
+  --auth-icon-bg: #000000;
+  --auth-icon-fill: #ffffff;
+  /* Map button inverts in dark mode: white bg + black graphics */
+  --map-btn-bg: #ffffff;
+  --map-btn-fg: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Text Selection Styling */
+::selection {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  overflow-x: hidden;
+}
+
+/* Centralized Transition for dynamic theme elements */
+svg path, svg rect, svg circle, svg ellipse {
+  transition: fill 0.2s ease;
+}
+
+/* --------------------------------------------------------------------------
+   HEADER LAYOUT (Height: 26px, Pure White Background)
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers the nav-container exactly */
+  width: 100%;
+  height: 26px;
+  background-color: var(--bg-color);
+  padding: 0 8px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Bottom Border Line across the entire header */
+.site-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--text-color);
+  z-index: 1;
+  transition: background-color 0.2s ease;
+}
+
+/* Navigation items container: centered and masks the bottom border symmetrically */
+.nav-container {
+  position: relative;
+  z-index: 2; /* Sits above the bottom border to mask it */
+  background-color: var(--bg-color);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 15px; /* Symmetrical masking gaps */
+  transition: background-color 0.2s ease;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text-color);
+  padding-bottom: 2px; /* Slight offset to vertically center the text */
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  transition: font-weight 0.15s ease, letter-spacing 0.15s ease, color 0.2s ease;
+}
+
+/* Reserve space for extra-bold and -6% tracking to prevent layout-shift (jitter) */
+.nav-link::before {
+  display: block;
+  content: attr(data-text);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+/* Hover Arrow pointing up */
+.nav-link .hover-arrow {
+  position: absolute;
+  bottom: 0px;
+  width: 6px;
+  height: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease, color 0.2s ease;
+  transform: translateY(2px);
+  color: var(--text-color);
+}
+
+.nav-link:hover .hover-arrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Auth Buttons: absolutely positioned on the right edge */
+.auth-container {
+  position: absolute;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 8px distance between Sign Up and Log In */
+  height: 100%;
+}
+
+.auth-signup-btn, .auth-login-btn {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-login-btn:hover .icon-slide-group {
+  transform: translateX(-14px);
+}
+
+.icon-slide-group {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+}
+
+/* Sign Up Button slide-up animation styles */
+.signup-slide-group {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-signup-btn:hover .signup-slide-group {
+  transform: translateY(-12px);
+}
+
+.scroll-spacer {
+  height: 100vh;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  transition: background-color 0.2s ease;
+  position: relative;   /* Establishes stacking context */
+  z-index: 2;           /* Above sticky hero (z-index: 1) so hero doesn't bleed through */
+}
+
+.spacer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spacer-label {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.03em;
+  color: #999999;
+  text-transform: uppercase;
+}
+
+.auth-container svg {
+  display: block;
+}
+
+/* Dynamic styling for Auth Pill SVG */
+.auth-text-path {
+  fill: var(--text-color);
+}
+
+#login-pill {
+  fill: var(--auth-bg);
+}
+
+#login-text {
+  fill: var(--auth-text);
+}
+
+.auth-login-btn ellipse {
+  fill: var(--auth-icon-bg);
+}
+
+#login-arrow {
+  fill: var(--auth-icon-fill);
+}
+
+#login-user circle,
+#login-user path {
+  fill: var(--auth-icon-fill);
+}
+
+/* Sign Up Button SVG Path colors */
+.signup-svg path {
+  fill: var(--text-color);
+}
+
+/* Logo SVGs paths dynamically switch fill color */
+.header-logo-svg path,
+.hero-logo-svg path {
+  fill: var(--text-color);
+}
+
+/* Header Logo (Horizontal, Scroll-Triggered) */
+.header-logo {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  display: flex;
+  align-items: center;
+  height: 21px; /* Matches Log In button height exactly */
+}
+
+.header-logo-svg {
+  height: 21px; /* Matches Log In button height exactly */
+  width: auto;
+  display: block;
+}
+
+.homepage .site-header.scrolled .header-logo {
+  opacity: 0;
+  transform: translateY(-50%) translateX(-10px);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   LANGUAGE SELECTOR & DROPDOWN STYLES
+   ========================================================================== */
+
+.lang-selector-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 8px; /* 8px margin + 8px flex gap = 16px exact distance to SIGN UP */
+}
+
+.lang-btn {
+  background: var(--btn-bg);
+  border: none;
+  color: var(--text-color);
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  height: 18px; /* Slim compact height fitting 26px header */
+  padding: 0 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.15s ease, color 0.2s ease;
+  line-height: 1;
+}
+
+.lang-btn:hover {
+  background-color: var(--btn-hover);
+}
+
+.lang-btn-arrow {
+  width: 6px;
+  height: 4px;
+  display: block;
+  transition: transform 0.15s ease;
+}
+
+.lang-selector-container:hover .lang-btn-arrow,
+.lang-selector-container.active .lang-btn-arrow {
+  transform: rotate(180deg);
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% - 1px); /* Hangs just below header bottom border */
+  right: 0;
+  width: 160px; /* Compact 5-column grid width */
+  background-color: var(--btn-bg);
+  padding: 5px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s, background-color 0.2s ease;
+  z-index: 200;
+}
+
+.lang-selector-container:hover .lang-dropdown,
+.lang-selector-container.active .lang-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-opt {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  padding: 3px 0;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, font-weight 0.15s ease, color 0.2s ease;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.lang-opt:hover {
+  background-color: var(--btn-hover);
+  font-weight: 800;
+}
+
+.lang-opt.active {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   THEME TOGGLE BUTTON STYLES
+   ========================================================================== */
+
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px; /* Compact size to balance Trigger text */
+  height: 15px;
+  color: var(--text-color);
+  margin-right: 8px; /* 8px margin + 8px flex gap = 16px exact distance to Language Selector */
+  transition: transform 0.15s ease, color 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle-btn svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  display: block;
+}
+
+/* Toggle light/dark icons depending on theme class on body */
+body.dark-theme .theme-icon-light {
+  display: block;
+}
+body.dark-theme .theme-icon-dark {
+  display: none;
+}
+/* Login button: user icon fills follow text color for dark theme inversion */
+#login-user circle,
+#login-user path {
+  fill: var(--auth-icon-fill) !important;
+  transition: fill 0.2s ease;
+}
+
+body:not(.dark-theme) .theme-icon-light {
+  display: none;
+}
+body:not(.dark-theme) .theme-icon-dark {
+  display: block;
+}
+
+/* ==========================================================================
+   ABOUT SECTION & MAP MORPHING STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   ABOUT SECTION
+   ========================================================================== */
+/* About section sits above sticky hero — slides over it naturally as you scroll */
+#about-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 2; /* Above sticky hero */
+  transition: background-color 0.2s ease;
+  scroll-margin-top: 32px; /* Offset for sticky header */
+}
+
+.about-text-block {
+  padding: 16px 8px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.about-text {
+  font-family: 'PP Neue York Normal', serif;
+  font-weight: 500;
+  /* font-size set dynamically by JS to fill exactly 3 lines */
+  font-size: 2.8vw;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text-color);
+  text-align: left;
+  text-transform: none;
+  hyphens: none;
+  -webkit-hyphens: none;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  transition: color 0.2s ease;
+  width: 100%;
+  white-space: normal;
+}
+
+/* ==========================================================================
+   MAP TRIGGER AREA — Morphs from a button strip into the full map
+   ========================================================================== */
+
+/* The trigger area IS the button. It starts at button proportions, expands to full map. */
+/* Expansion is always from the center — margin stays auto */
+.map-trigger-area {
+  position: relative;
+  width: 24.028vw;
+  height: 45.347vw;
+  /* max-width/max-height are part of the transition so collapse animates correctly */
+  max-width: 346px;
+  max-height: 653px;
+  margin: 32px auto 0; /* Stays centered — expansion grows outward from center */
+  background-color: var(--map-btn-bg);
+  overflow: hidden;
+  cursor: pointer;
+  transform-origin: center top;
+  /* Transition all size properties for smooth expand AND collapse */
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1),
+              height 1s cubic-bezier(0.16, 1, 0.3, 1),
+              max-width 1s cubic-bezier(0.16, 1, 0.3, 1),
+              max-height 1s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.map-trigger-area.expanded {
+  width: calc(100% - 16px);
+  height: 600px;
+  max-width: 9999px; /* Effectively no limit — animatable from 346px */
+  max-height: 9999px;
+  cursor: default;
+}
+
+.map-trigger-area.expanded.depot-selected {
+  height: 750px;
+}
+
+/* --------------------------------------------------------------------------
+   BUTTON SVG HOVER ANIMATION
+   The arrow group slides down to touch the bottom line on hover
+   The black background slightly expands horizontally
+   -------------------------------------------------------------------------- */
+
+/* Inline SVG button: centered inside container */
+.map-button-svg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  max-width: 346px;
+  max-height: 653px;
+  display: block;
+  z-index: 2;
+  transition: opacity 0.4s ease 0.6s;
+  overflow: visible;
+}
+
+/* Arrow group inside the SVG — shifts down on hover */
+#svg-arrow-group {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center bottom;
+}
+
+/* Background rect — expands slightly on hover via CSS transform; color follows theme */
+.svg-bg-rect {
+  transform-origin: 50% 50%;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), fill 0.2s ease;
+  fill: var(--map-btn-bg) !important;
+}
+
+/* All vector paths/text inside the map button SVG follow the foreground theme color */
+.map-button-svg path,
+.map-button-svg g path {
+  fill: var(--map-btn-fg) !important;
+  stroke: var(--map-btn-fg) !important;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+/* On hover: arrow slides down ~18px, bg rect widens ~6% each side */
+.map-trigger-area:not(.expanded):hover #svg-arrow-group {
+  transform: translateY(18px);
+}
+
+.map-trigger-area:not(.expanded):hover .svg-bg-rect {
+  transform: scaleX(1.08);
+}
+
+/* When expanded: SVG fades out */
+.map-trigger-area.expanded .map-button-svg {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease 0s;
+}
+
+/* When NOT expanded (collapsing/collapsed): SVG fades back in with delay */
+.map-trigger-area:not(.expanded) .map-button-svg {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.5s ease 0.6s; /* delay until size animation is well underway */
+}
+
+/* --------------------------------------------------------------------------
+   MAP LOADING LOGO OVERLAY
+   Horizontal ARRAY DEPOT logo that fills left-to-right from gray to black
+   -------------------------------------------------------------------------- */
+
+.map-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4; /* Above map, below collapse button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.map-trigger-area.map-loading .map-loading-overlay {
+  opacity: 1;
+}
+
+.map-loading-logo-text {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: clamp(24px, 4vw, 60px);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  position: relative;
+  color: #aaaaaa; /* Initial: gray text */
+  display: inline-block;
+}
+
+/* Animated fill overlay that sweeps left-to-right from black */
+.map-loading-logo-text::after {
+  content: 'ARRAY DEPOT';
+  position: absolute;
+  inset: 0;
+  color: var(--text-color);
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0%;
+  animation: none;
+}
+
+.map-trigger-area.map-loading .map-loading-logo-text::after {
+  animation: logoFillLTR 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Left-to-right color sweep using width expansion */
+@keyframes logoFillLTR {
+  from { width: 0%;   }
+  to   { width: 100%; }
+}
+
+/* Close/collapse button: fades in at top-right when map is expanded */
+.map-collapse-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  padding: 6px 12px;
+  font-family: 'PP Neue York Normal', serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  z-index: 1000; /* Must sit on top of Leaflet controls */
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease 0s, background-color 0.2s ease, color 0.2s ease;
+}
+
+.map-trigger-area.expanded .map-collapse-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease 0.7s, background-color 0.2s ease, color 0.2s ease;
+}
+
+.map-collapse-btn:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+
+/* Recenter button: floats at bottom-right, fades in when map is expanded */
+.map-recenter-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000; /* Must sit on top of Leaflet controls */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease 0s, background-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.map-trigger-area.expanded .map-recenter-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease 0.7s, background-color 0.2s ease, color 0.2s ease;
+}
+
+.map-recenter-btn:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+
+.map-recenter-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.map-recenter-btn:active svg {
+  transform: scale(0.85);
+}
+
+/* Map element — fills the expanding area, fades in after height settles */
+#map-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.2s ease 0s;
+}
+
+.map-trigger-area.expanded #map-element {
+  opacity: 1;
+  transition: opacity 0.45s ease 0.55s;
+}
+
+.leaflet-left {
+  transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#map-element.has-selected-depot .leaflet-left {
+  left: 50% !important;
+}
+
+/* ==========================================================================
+   DEPOT INFO SIDE PANEL — Slides in from left on depot click
+   ========================================================================== */
+
+.depot-info-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: var(--bg-color);
+  z-index: 20;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease;
+  border-right: 1px solid var(--text-color);
+  display: flex;
+  pointer-events: none;
+}
+
+.depot-info-panel.visible {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.depot-panel-placeholder {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #888;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: auto;
+}
+
+.depot-panel-content {
+  width: 100%;
+  height: 100%;
+  padding: 24px 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  overflow-y: auto;
+}
+
+
+.depot-panel-title {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px 0;
+  color: var(--text-color);
+  text-transform: uppercase;
+}
+
+.depot-panel-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.depot-panel-label {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: #888;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+}
+
+.depot-panel-address {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.35;
+  margin: 0 0 24px 0;
+  color: var(--text-color);
+  text-transform: uppercase;
+}
+
+.depot-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.depot-card {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+
+.depot-card.full-width {
+  grid-column: span 2;
+}
+
+.depot-card-title {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.depot-card-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--text-color);
+  opacity: 0.15;
+}
+
+.depot-card-subtitle {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.depot-card-value-box {
+  background-color: var(--btn-bg);
+  border: none;
+  padding: 14px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+
+.depot-card-value {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--text-color);
+}
+
+.depot-card-desc {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: #888;
+  text-transform: uppercase;
+}
+
+
+.status-active {
+  color: #00cc66;
+}
+
+.depot-panel-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+  z-index: 25;
+}
+
+.depot-panel-close-btn:hover {
+  opacity: 1;
+}
+
+/* Safety certification block in depot side panel */
+.depot-safety-system {
+  margin-top: auto;
+  margin-bottom: 16px;
+  width: 100%;
+  border-top: 1px solid var(--text-color);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.safety-title {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.safety-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.safety-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.safety-icon {
+  height: 18px;
+  width: auto;
+  display: block;
+}
+
+body.dark-theme .safety-icon {
+  filter: invert(1);
+}
+
+.safety-status {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--text-color);
+}
+
+.go-to-dashboard-btn {
+  display: block;
+  width: 100%;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  border: 1px solid var(--text-color);
+  padding: 10px 16px;
+  font-family: 'PP Neue York Normal', serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+  margin-top: 8px;
+}
+
+.go-to-dashboard-btn:hover {
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   LEAFLET MAP CUSTOMIZATION
+   ========================================================================== */
+
+/* Remove the blue tint from CartoDB tiles — force pure grayscale and high contrast */
+.leaflet-tile-container {
+  filter: grayscale(1);
+  transition: filter 0.2s ease;
+}
+
+body.dark-theme .leaflet-tile-container {
+  /* Dark CartoDB tiles are already dark — only grayscale, no extra contrast/brightness
+     that would make them pitch black */
+  filter: grayscale(1);
+}
+
+.leaflet-container {
+  font-family: 'PP Neue York Condensed', serif !important;
+  background-color: var(--bg-color) !important;
+}
+
+/* Zoom controls: bare +/− symbols, no box background */
+.leaflet-control-zoom {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background: transparent !important;
+  color: var(--text-color) !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-size: 22px !important;
+  font-weight: 300 !important;
+  width: 26px !important;
+  height: 26px !important;
+  line-height: 24px !important;
+  border-radius: 0 !important;
+  text-shadow: none !important;
+  opacity: 0.7;
+  transition: opacity 0.15s ease !important;
+}
+
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
+  background: transparent !important;
+  opacity: 1;
+}
+
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+/* Suppress default Leaflet popup to avoid ugly bubbles */
+.leaflet-popup {
+  display: none !important;
+}
+
+/* ==========================================================================
+   CUSTOM MAP MARKERS
+   ========================================================================== */
+
+/* User location avatar marker */
+.custom-user-marker {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Non-clickable */
+}
+
+.user-marker-svg {
+  width: 30px;
+  height: 42px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+}
+
+/* Depot warehouse badge marker */
+.custom-depot-marker {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.depot-marker-badge {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--bg-color);
+  box-shadow: none;
+  transition: transform 0.15s ease, background-color 0.2s, color 0.2s;
+}
+
+.custom-depot-marker:hover .depot-marker-badge {
+  transform: scale(1.25);
+}
+
+/* Cluster marker styling */
+.custom-cluster-marker {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cluster-marker-badge {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--text-color);
+  box-shadow: none;
+  transition: transform 0.15s ease, background-color 0.2s, color 0.2s;
+}
+
+.custom-cluster-marker:hover .cluster-marker-badge {
+  transform: scale(1.15);
+}
+
+/* When a depot is selected: modify non-selected markers and clusters */
+#map-element.has-selected-depot .custom-depot-marker:not(.selected-depot) .depot-marker-badge {
+  background-color: #888888 !important;
+  color: #dddddd !important;
+  border-color: #cccccc !important;
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+#map-element.has-selected-depot .custom-cluster-marker .cluster-marker-badge {
+  border-color: #888888 !important;
+  color: #888888 !important;
+  background-color: var(--bg-color) !important;
+  opacity: 0.6;
+}
+
+/* Selected marker should grow and remain highlighted */
+#map-element.has-selected-depot .custom-depot-marker.selected-depot {
+  z-index: 99999 !important;
+}
+
+#map-element.has-selected-depot .custom-depot-marker.selected-depot .depot-marker-badge {
+  transform: scale(1.6) !important;
+  z-index: 99999 !important;
+}
+
+/* ==========================================================================
+   CUSTOM BRUTALIST SCROLLBAR STYLING
+   ========================================================================== */
+
+/* WebKit-based browsers (Chrome, Safari, Edge, Opera) */
+::-webkit-scrollbar {
+  width: 8px; /* width of vertical scrollbar */
+  height: 8px; /* height of horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-left: 1px solid var(--text-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-color);
+  border: 1px solid var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color);
+}
+
+/* Firefox fallback */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-color) var(--bg-color);
+}
+
+/* ==========================================================================
+   FOOTER ABOUT SECTION
+   ========================================================================== */
+
+.footer-about-section {
+  width: 100%;
+  background-color: var(--bg-color);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  z-index: 5;
+  position: relative;
+  box-sizing: border-box;
+  padding: 64px 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.8fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* Column 1: About Intro */
+.about-intro-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.about-intro-col h2 {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--text-color);
+  transition: color 0.2s ease;
+  max-width: 250px;
+}
+
+.about-intro-col p {
+  font-family: 'PP Neue York Normal', serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--text-color);
+  text-transform: none;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+/* Column 2: Country Slideshow */
+.about-country-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-country-container {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 180px;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+}
+
+.about-country-container img {
+  height: 140px;
+  width: auto;
+  max-width: 95%;
+  max-height: 95%;
+  display: block;
+}
+
+body.dark-theme .about-country-container img {
+  filter: invert(1);
+}
+
+/* Column 3: Density and Routing Details */
+.about-details-col {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 8px;
+  row-gap: 24px;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.about-details-col h3 {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--text-color);
+  transition: color 0.2s ease;
+}
+
+.about-details-col p {
+  font-family: 'PP Neue York Normal', serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--text-color);
+  text-transform: none;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+  .footer-about-section {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 48px 8px;
+  }
+
+  .about-intro-col h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-country-container {
+    max-width: 140px;
+  }
+
+  .about-country-container img {
+    height: 110px;
+  }
+
+  .about-details-col {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    column-gap: 0;
+  }
+
+  .about-details-col h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   SITE FOOTER (Negative Space Brutalist)
+   ========================================================================== */
+
+.site-footer {
+  width: 100%;
+  background-color: var(--text-color);
+  position: relative;
+  z-index: 10;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  overflow: visible;
+}
+
+.footer-logo-banner {
+  background-color: var(--bg-color);
+  height: 14vw;
+  min-height: 120px;
+  max-height: 240px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: visible;
+  position: relative;
+  transition: background-color 0.2s ease, height 0.2s ease;
+}
+
+.footer-logo-svg {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  transform: translateY(-1.5vw);
+  transition: fill 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-logo-svg path {
+  fill: var(--text-color);
+  transition: fill 0.2s ease;
+}
+
+.footer-content-wrapper {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  padding: calc(4vw + 24px) 8px 32px 8px;
+  max-width: 100%;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.footer-brand-column {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.footer-slogan {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.footer-desc {
+  font-family: 'PP Neue York Normal', serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  text-transform: none;
+  opacity: 0.8;
+}
+
+.footer-newsletter {
+  margin-bottom: 20px;
+}
+
+.newsletter-title {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.newsletter-form {
+  display: flex;
+  border: 1px solid var(--bg-color);
+  width: 100%;
+  max-width: 380px;
+  background-color: var(--text-color);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.newsletter-input {
+  background: transparent;
+  border: none;
+  color: var(--bg-color);
+  padding: 8px 12px;
+  font-family: 'PP Neue York Condensed', serif;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+}
+
+.newsletter-input::placeholder {
+  color: var(--bg-color);
+  opacity: 0.4;
+}
+
+.newsletter-btn {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: none;
+  padding: 0 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.newsletter-btn:hover {
+  background-color: var(--btn-hover);
+  color: var(--bg-color);
+  border-left: 1px solid var(--bg-color);
+}
+
+.newsletter-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.newsletter-btn:hover svg {
+  transform: translateX(2px);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 16px;
+}
+
+.social-link {
+  text-decoration: none;
+  color: var(--bg-color);
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  color: var(--bg-color);
+  opacity: 0.8;
+}
+
+.footer-links-column {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.links-subgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.links-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.links-title {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.links-list a {
+  text-decoration: none;
+  color: var(--bg-color);
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease, font-weight 0.15s ease, letter-spacing 0.15s ease;
+}
+
+.links-list a:hover {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.metrics-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metrics-list li {
+  font-family: 'PP Neue York Condensed', serif;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-bottom: 3px;
+  transition: border-color 0.2s ease;
+}
+
+body.dark-theme .metrics-list li {
+  border-bottom-color: rgba(0, 0, 0, 0.15);
+}
+
+.metric-lbl {
+  color: var(--bg-color);
+  opacity: 0.6;
+}
+
+.metric-val {
+  font-weight: 800;
+  color: var(--bg-color);
+}
+
+.footer-bottom-bar {
+  margin-top: 32px;
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'PP Neue York Condensed', serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: border-color 0.2s ease;
+}
+
+.copyright-text,
+.design-credits {
+  opacity: 0.6;
+  color: var(--bg-color);
+}
+
+/* Responsive Footer Layout */
+@media (max-width: 768px) {
+  .footer-logo-banner {
+    height: 14vw;
+    min-height: 80px;
+  }
+  
+  .footer-logo-svg {
+    width: 100%;
+    transform: translateY(-1.5vw);
+  }
+
+  .footer-content-wrapper {
+    padding: calc(4vw + 16px) 8px 24px 8px;
+  }
+
+  .footer-columns {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .footer-brand-column {
+    padding-right: 0;
+  }
+
+  .footer-links-column {
+    padding-left: 0;
+    border-left: none !important;
+  }
+
+  .links-subgrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 24px;
+  }
+}
+
+/* ==========================================================================
+   MOBILE BURGER MENU & DRAWER (Brutalist style)
+   ========================================================================== */
+
+/* Burger button styles (desktop hidden by default) */
+.burger-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  width: 18px;
+  height: 12px;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1002;
+  box-sizing: border-box;
+}
+
+.burger-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-color);
+  position: absolute;
+  left: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.burger-bar:nth-child(1) { top: 0; }
+.burger-bar:nth-child(2) { top: 5px; }
+.burger-bar:nth-child(3) { top: 10px; }
+
+/* Mobile menu drawer */
+.mobile-menu-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-color);
+  z-index: 10000;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.mobile-menu-drawer.active {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 44px;
+  margin-bottom: 24px;
+}
+
+.close-drawer-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 8px;
+  top: 0;
+  width: 18px;
+  height: 44px;
+  color: var(--text-color);
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 2px solid var(--text-color);
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+
+.mobile-nav-link {
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.mobile-nav-link:hover {
+  opacity: 0.7;
+}
+
+.mobile-drawer-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  font-family: 'PP Neue York Condensed', serif;
+  font-weight: 800;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.mobile-auth-btn.signup-btn {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  border: 1px solid var(--text-color);
+}
+
+.mobile-auth-btn.login-btn {
+  background-color: var(--btn-bg);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+}
+
+/* ── Mobile Layout Adjustments ── */
+@media (max-width: 768px) {
+  .site-header {
+    height: 44px;
+    padding: 0 16px;
+  }
+  
+  .nav-container {
+    display: none !important;
+  }
+  
+  .auth-signup-btn,
+  .auth-login-btn,
+  .user-info-box {
+    display: none !important;
+  }
+
+  .burger-menu-btn {
+    display: block;
+  }
+  
+  /* Hero Logo layout on mobile */
+  #hero-section {
+    top: 44px; /* Matches new header height */
+    padding-top: 16px;
+    padding-bottom: 16px;
+    height: auto;
+  }
+
+  .hero-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .hero-logo-container {
+    width: 60%;
+    max-width: 250px;
+  }
+  
+  .hero-info-container {
+    align-items: center;
+    width: 100%;
+  }
+  
+  .info-top-block {
+    align-items: center;
+  }
+  
+  .info-bottom-block {
+    align-items: center;
+    margin-top: 12px;
+  }
+
+  /* Map and Depot Info side panel */
+  .map-trigger-area.expanded {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .map-trigger-area.expanded.depot-selected {
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .map-trigger-area.expanded #map-element {
+    position: relative !important;
+    height: 350px !important;
+    width: 100% !important;
+    flex-shrink: 0;
+    z-index: 5;
+  }
+
+  #map-element.has-selected-depot .leaflet-left {
+    left: 10px !important;
+  }
+  
+  .depot-info-panel {
+    position: relative !important;
+    width: 100% !important;
+    border-left: none !important;
+    border-top: 1px solid var(--text-color);
+    height: auto !important;
+    max-height: none !important;
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+    padding: 16px 8px !important;
+    z-index: 10 !important;
+    transform: none !important;
+    display: none;
+    pointer-events: auto !important;
+  }
+
+  .depot-info-panel.visible {
+    display: flex !important;
+  }
+
+  .depot-panel-content {
+    height: auto !important;
+    overflow: visible !important;
+    padding: 16px 8px !important;
+  }
+}
