@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARRAY DEPOT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+  <!-- Leaflet Map Assets -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body class="homepage">
+  <script>
+    // Immediate Theme Initialization to prevent white flash
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+      }
+    })();
+  </script>
+
+  <header class="site-header">
+    <!-- Horizontal Logo (fades in on scroll) -->
+    <a href="#" class="header-logo" aria-label="Array Depot">
+      <svg class="header-logo-svg" viewBox="0 0 982.9 171.27" xmlns="http://www.w3.org/2000/svg">
+        <path d="M38.06,2.79h44.33l37.6,165.7h-37.36l-7.19-35.97h-36.44l-7.19,35.97H0L38.06,2.79ZM69.85,104.67l-12.3-61.73h-.46l-12.53,61.73h25.3Z" fill="black"/>
+        <path d="M101.42,2.79h48.04c39.45,0,59.64,17.17,59.64,48.27,0,20.65-9.28,35.27-25.76,42.93l29.24,74.5h-39.68l-23.67-65.67h-10.91v65.67h-36.9V2.79ZM172.2,52.22c0-14.39-7.19-22.05-22.05-22.05h-11.84v44.79h12.07c15.09,0,21.82-7.89,21.82-22.74Z" fill="black"/>
+        <path d="M197.27,2.79h48.04c39.45,0,59.64,17.17,59.64,48.27,0,20.65-9.28,35.27-25.76,42.93l29.24,74.5h-39.68l-23.67-65.67h-10.91v65.67h-36.9V2.79ZM268.05,52.22c0-14.39-7.19-22.05-22.05-22.05h-11.84v44.79h12.07c15.09,0,21.82-7.89,21.82-22.74Z" fill="black"/>
+        <path d="M320.97,2.79h44.33l37.6,165.7h-37.36l-7.19-35.97h-36.44l-7.19,35.97h-31.79L320.97,2.79ZM352.76,104.67l-12.3-61.73h-.46l-12.53,61.73h25.3Z" fill="black"/>
+        <path d="M402.2,100.72L360.65,2.79h40.38l22.28,61.27h.23l23.21-61.27h32.72l-40.15,97.7v68h-37.13v-67.76Z" fill="black"/>
+        <path d="M501.81,2.79h43.4c44.33,0,66.61,25.06,66.61,82.15s-21.81,83.55-67.3,83.55h-42.7V2.79ZM573.05,84.94c0-41.77-8.12-54.07-29.47-54.07h-4.41v109.54h4.41c21.35,0,29.47-13.46,29.47-55.46Z" fill="black"/>
+        <path d="M603.23,2.79h88.65v28.08h-51.29v37.13h32.03v27.62h-32.03v44.79h54.54v28.08h-91.9V2.79Z" fill="black"/>
+        <path d="M685.38,2.79h45.49c40.38,0,60.34,17.17,60.34,51.52s-20.89,51.05-57.79,51.05h-11.14v63.13h-36.9V2.79ZM754.08,53.84c0-15.78-7.2-23.44-22.28-23.44h-9.52v47.34h9.52c15.32,0,22.28-7.89,22.28-23.9Z" fill="black"/>
+        <path d="M776.36,85.64c0-54.54,21.81-85.64,59.87-85.64s60.11,31.1,60.11,85.64-21.81,85.64-60.11,85.64-59.87-31.1-59.87-85.64ZM856.65,85.64c0-42.7-5.8-58.72-20.42-58.72s-20.42,16.02-20.42,58.72,5.8,58.71,20.42,58.71,20.42-16.24,20.42-58.71Z" fill="black"/>
+        <path d="M910.73,30.87h-35.27V2.79h107.45v28.08h-35.04v137.62h-37.13V30.87Z" fill="black"/>
+      </svg>
+    </a>
+    <!-- Left Border Line Segment -->
+    <div class="border-segment segment-left"></div>
+
+    <!-- Navigation Menu Items -->
+    <nav class="nav-container">
+      <a href="#about-section" data-text="STORAGE" class="nav-link" data-i18n-link>
+        <span class="nav-link-text" data-i18n-key="storage">STORAGE</span>
+        <svg class="hover-arrow" viewBox="0 0 6 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.8868 8H2.1488V3.391L0.0148 3.864L3.0178 0.014L6.0208 3.875L3.8868 3.391V8Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href="#logistics" data-text="LOGISTICS" class="nav-link" data-i18n-link>
+        <span class="nav-link-text" data-i18n-key="logistics">LOGISTICS</span>
+        <svg class="hover-arrow" viewBox="0 0 6 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.8868 8H2.1488V3.391L0.0148 3.864L3.0178 0.014L6.0208 3.875L3.8868 3.391V8Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href="dashboard.html" data-text="DASHBOARD" class="nav-link" data-i18n-link>
+        <span class="nav-link-text" data-i18n-key="dashboard">DASHBOARD</span>
+        <svg class="hover-arrow" viewBox="0 0 6 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.8868 8H2.1488V3.391L0.0148 3.864L3.0178 0.014L6.0208 3.875L3.8868 3.391V8Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href="#about" data-text="ABOUT" class="nav-link" data-i18n-link>
+        <span class="nav-link-text" data-i18n-key="about">ABOUT</span>
+        <svg class="hover-arrow" viewBox="0 0 6 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.8868 8H2.1488V3.391L0.0148 3.864L3.0178 0.014L6.0208 3.875L3.8868 3.391V8Z" fill="currentColor"/>
+        </svg>
+      </a>
+    </nav>
+
+    <!-- Right Border Line Segment -->
+    <div class="border-segment segment-right"></div>
+
+    <!-- Auth Buttons -->
+    <div class="auth-container">
+      <!-- Theme Switcher Toggle -->
+      <button class="theme-toggle-btn" aria-label="Toggle Dark Theme">
+        <svg class="theme-icon-light" viewBox="0 0 770.7 799.25" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M557.07,555.93c45.42-45.61,70.43-106.16,70.43-170.55s-25.14-125.27-70.78-170.91l-.86-.86c-45.66-45.66-106.36-70.8-170.93-70.8-64.57,0-125.27,25.15-170.93,70.8-45.63,45.63-70.78,106.31-70.8,170.84-.02,64.36,24.94,124.9,70.31,170.52l57.56,59.64v99h228.56v-98.24l57.44-59.44ZM294.61,294.22c24.9-24.9,57.62-37.35,90.33-37.35s65.4,12.45,90.29,37.33l.86.86c24.12,24.12,37.41,56.2,37.41,90.32s-13.29,66.19-37.41,90.32l-.35.35-90.04,93.18-90.47-93.73-.68-.69c-49.73-49.8-49.7-130.81.06-180.58Z"/>
+            <rect x="271.07" y="742.16" width="228.56" height="57.09"/>
+            <rect x="95.47" y="560" width="114.18" height="113.59" transform="translate(-391.45 288.53) rotate(-45)"/>
+            <rect x="559.71" y="95.77" width="114.18" height="113.59" transform="translate(72.78 480.83) rotate(-45)"/>
+            <rect x="96.15" y="96.15" width="114.18" height="114.18" transform="translate(-63.47 153.23) rotate(-45)"/>
+            <rect x="560.38" y="560.38" width="114.18" height="114.18" transform="translate(-255.76 617.47) rotate(-45)"/>
+            <rect y="327.6" width="114.18" height="113.59"/>
+            <rect x="656.52" y="327.6" width="114.18" height="113.59"/>
+            <rect x="328.26" width="114.18" height="114.18"/>
+          </g>
+        </svg>
+        <svg class="theme-icon-dark" viewBox="0 0 770.56 799.16" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M627.43,385.29c0-64.57-25.14-125.27-70.83-170.95l-.81-.81c-37.07-37.07-84.02-60.67-135.78-68.24-50.69-7.42-101.41,1.1-146.67,24.65-21.87,11.37-41.85,26.04-59.41,43.6-45.63,45.63-70.78,106.31-70.8,170.84-.02,64.36,24.94,124.9,70.31,170.53l57.55,59.63v99h228.56v-98.24l57.44-59.44c45.42-45.61,70.43-106.16,70.43-170.55Z"/>
+            <rect x="271" y="742.07" width="228.56" height="57.09"/>
+            <path d="M740.26,235.29c-19.41-45.89-47.18-87.08-82.54-122.45s-76.56-63.14-122.45-82.54C487.73,10.19,437.27,0,385.28,0s-102.45,10.19-149.99,30.3c-45.89,19.41-87.08,47.18-122.45,82.54-35.36,35.37-63.14,76.56-82.54,122.45C10.19,282.83,0,333.29,0,385.28s10.22,102.56,30.37,150.15c19.45,45.93,47.28,87.16,82.72,122.53l80.54-80.68c-51.35-51.26-79.63-119.44-79.63-192s28.22-140.59,79.46-191.82,119.36-79.46,191.82-79.46,140.59,28.22,191.82,79.46c51.24,51.24,79.46,119.36,79.46,191.82s-28.52,141.34-80.31,192.67l80.25,80.96c35.73-35.41,63.79-76.75,83.42-122.85,20.33-47.77,30.64-98.5,30.64-150.78s-10.19-102.45-30.3-149.99Z"/>
+          </g>
+        </svg>
+      </button>
+      <!-- Language Dropdown -->
+      <div class="lang-selector-container">
+        <button class="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select Language">
+          UK
+          <svg class="lang-btn-arrow" viewBox="0 0 6 4" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0L3 3L6 0H0Z" fill="currentColor"/>
+          </svg>
+        </button>
+        <div class="lang-dropdown" role="listbox">
+          <button class="lang-opt" data-lang="AT" role="option">AT</button>
+          <button class="lang-opt" data-lang="BA" role="option">BA</button>
+          <button class="lang-opt" data-lang="BE" role="option">BE</button>
+          <button class="lang-opt" data-lang="BG" role="option">BG</button>
+          <button class="lang-opt" data-lang="CH" role="option">CH</button>
+          <button class="lang-opt" data-lang="CR" role="option">CR</button>
+          <button class="lang-opt" data-lang="CZ" role="option">CZ</button>
+          <button class="lang-opt" data-lang="DE" role="option">DE</button>
+          <button class="lang-opt" data-lang="DK" role="option">DK</button>
+          <button class="lang-opt" data-lang="EE" role="option">EE</button>
+          <button class="lang-opt" data-lang="ES" role="option">ES</button>
+          <button class="lang-opt" data-lang="FI" role="option">FI</button>
+          <button class="lang-opt" data-lang="FR" role="option">FR</button>
+          <button class="lang-opt" data-lang="GR" role="option">GR</button>
+          <button class="lang-opt" data-lang="HU" role="option">HU</button>
+          <button class="lang-opt" data-lang="IE" role="option">IE</button>
+          <button class="lang-opt" data-lang="IT" role="option">IT</button>
+          <button class="lang-opt" data-lang="LT" role="option">LT</button>
+          <button class="lang-opt" data-lang="LV" role="option">LV</button>
+          <button class="lang-opt" data-lang="NL" role="option">NL</button>
+          <button class="lang-opt" data-lang="NO" role="option">NO</button>
+          <button class="lang-opt" data-lang="PL" role="option">PL</button>
+          <button class="lang-opt" data-lang="PT" role="option">PT</button>
+          <button class="lang-opt" data-lang="RO" role="option">RO</button>
+          <button class="lang-opt" data-lang="RS" role="option">RS</button>
+          <button class="lang-opt" data-lang="SE" role="option">SE</button>
+          <button class="lang-opt" data-lang="SI" role="option">SI</button>
+          <button class="lang-opt" data-lang="SK" role="option">SK</button>
+          <button class="lang-opt active" data-lang="UK" role="option">UK</button>
+        </div>
+      </div>
+      <!-- SIGN UP Link -->
+      <a href="#signup" class="auth-signup-btn" aria-label="Sign Up">
+        <svg class="signup-svg" width="40" height="12" viewBox="0 0 40 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- "SIGN" text is stationary -->
+          <path d="M3.45223 11.168C1.77223 11.168 0.666235 10.132 0.484234 8.41L1.82823 8.158C1.94023 9.39 2.54223 10.09 3.48023 10.09C4.36223 10.09 4.90823 9.516 4.90823 8.564C4.90823 7.808 4.60023 7.304 3.84423 6.87L2.51423 6.1C1.29623 5.4 0.750235 4.546 0.750235 3.412C0.750235 1.886 1.84223 0.836 3.42423 0.836C4.88023 0.836 5.94423 1.718 6.12623 3.048L4.86623 3.426C4.69823 2.446 4.22223 1.914 3.45223 1.914C2.65423 1.914 2.15023 2.446 2.15023 3.258C2.15023 3.986 2.50023 4.392 3.55023 4.98L4.72623 5.652C5.80423 6.268 6.33623 7.192 6.33623 8.368C6.33623 10.076 5.20223 11.168 3.45223 11.168ZM7.12975 11V1.004H8.64175V11H7.12975ZM12.64 11.168C10.694 11.168 9.54595 9.292 9.54595 6.086C9.54595 2.74 10.736 0.836 12.962 0.836C14.6 0.836 15.706 1.844 15.888 3.832L14.39 4C14.362 2.586 13.788 1.928 12.962 1.928C11.702 1.928 11.128 3.342 11.128 6.058C11.128 8.732 11.744 10.062 12.934 10.062C13.97 10.062 14.572 8.998 14.572 7.136V6.996H12.99V5.946H15.986V11H15.216L14.978 9.138C14.684 10.412 13.816 11.168 12.64 11.168ZM16.9948 11V1.004H18.8708L21.7268 7.682H21.7408L21.7128 6.254V1.004H23.0568V11H21.8808L18.2968 2.698H18.2828L18.3388 4.224V11H16.9948Z" fill="black"/>
+          
+          <!-- Mask to clip the sliding UP text and arrows -->
+          <mask id="signup-mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="25" y="0" width="15" height="12">
+            <rect x="25" y="0" width="15" height="12" fill="#D9D9D9"/>
+          </mask>
+          <g mask="url(#signup-mask)">
+            <g class="signup-slide-group">
+              <!-- "UP" text in default position -->
+              <path d="M29.2296 11.168C27.2136 11.168 26.2196 10.09 26.2196 8.228V1.004H27.7316V8.368C27.7316 9.404 28.2636 10.006 29.2996 10.006C30.3076 10.006 30.8256 9.404 30.8256 8.368V1.004H32.1276L32.1416 8.214C32.1416 10.062 31.1056 11.168 29.2296 11.168ZM33.2937 11V1.004H35.8277C37.9697 1.004 39.1457 2.012 39.1457 3.958C39.1457 5.89 37.9557 6.912 35.8697 6.912H34.7917V11H33.2937ZM35.8697 5.792C37.0737 5.792 37.6337 5.148 37.6337 3.958C37.6337 2.754 37.0737 2.124 35.8697 2.124H34.7917V5.792H35.8697Z" fill="black"/>
+              
+              <!-- Two upward-pointing arrows from arrows up.svg, offset vertically by 12px and centered horizontally at x=27 -->
+              <g class="signup-arrows" transform="translate(27, 12)">
+                <path d="M3.36003 10.164H2.08603V3.752L2.59429e-05 4.186L2.73003 1.3113e-06L5.44603 4.186L3.36003 3.752V10.164ZM9.35214 10.164H8.07814V3.752L5.99214 4.186L8.72214 1.3113e-06L11.4381 4.186L9.35214 3.752V10.164Z" fill="black"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+
+      <!-- LOG IN Link -->
+      <a href="#login" class="auth-login-btn" aria-label="Log In">
+        <svg width="52" height="21" viewBox="0 0 52 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Button Background Pill -->
+          <path id="login-pill" d="M0 2H43C47.9706 2 52 6.02944 52 11C52 15.9706 47.9706 20 43 20H0V2Z" fill="black"/>
+          <!-- LOG IN Text -->
+          <path id="login-text" d="M2.24514 15.5V5.504H3.75714V14.352H7.20114V15.5H2.24514ZM10.4016 15.668C8.23156 15.668 6.98556 13.764 6.98556 10.502C6.98556 7.24 8.23156 5.336 10.4016 5.336C12.5716 5.336 13.8316 7.24 13.8316 10.502C13.8316 13.764 12.5716 15.668 10.4016 15.668ZM10.4016 14.562C11.6336 14.562 12.2356 13.26 12.2356 10.502C12.2356 7.744 11.6336 6.428 10.4016 6.428C9.18356 6.428 8.58156 7.744 8.58156 10.502C8.58156 13.26 9.18356 14.562 10.4016 14.562ZM17.5072 15.668C15.5612 15.668 14.4132 13.792 14.4132 10.586C14.4132 7.24 15.6032 5.336 17.8292 5.336C19.4672 5.336 20.5732 6.344 20.7552 8.332L19.2572 8.5C19.2292 7.086 18.6552 6.428 17.8292 6.428C16.5692 6.428 15.9952 7.842 15.9952 10.558C15.9952 13.232 16.6112 14.562 17.8012 14.562C18.8372 14.562 19.4392 13.498 19.4392 11.636V11.496H17.8572V10.446H20.8532V15.5H20.0832L19.8452 13.638C19.5512 14.912 18.6832 15.668 17.5072 15.668ZM23.9577 15.5V5.504H25.4697V15.5H23.9577ZM26.6959 15.5V5.504H28.5719L31.4279 12.182H31.4419L31.4139 10.754V5.504H32.7579V15.5H31.5819L27.9979 7.198H27.9839L28.0399 8.724V15.5H26.6959Z" fill="white"/>
+
+          <!-- Mask for the sliding arrow and user icon -->
+          <mask id="mask0_25_47" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="36" y="3" width="14" height="16">
+            <ellipse cx="43" cy="10.8621" rx="7" ry="7.24138" fill="white"/>
+          </mask>
+          <g mask="url(#mask0_25_47)">
+            <!-- Stationary White Background Circle -->
+            <ellipse cx="43" cy="10.8621" rx="7" ry="7.24138" fill="white"/>
+
+            <!-- Sliding Icons Group -->
+            <g class="icon-slide-group">
+              <!-- Arrow Icon (Visible by default) -->
+              <path id="login-arrow" d="M48.082 9.92069L48.082 11.8034L41.936 11.8034L42.398 13.9614L37.918 10.8621L42.398 7.76276L41.936 9.92069L48.082 9.92069Z" fill="black"/>
+
+              <!-- User/Human Icon (Offset by 14px to the right, using official user.svg paths) -->
+              <g id="login-user" transform="translate(57, 10.8621) scale(0.7) translate(-10, -15)">
+                <circle cx="10" cy="14.5" r="4.42269" fill="black"/>
+                <path d="M9.99965 19.7006C12.1886 19.7006 14.209 20.424 15.8346 21.644C14.2771 23.0129 12.2362 23.8452 9.99965 23.8452C7.76331 23.8451 5.7231 23.0127 4.16566 21.644C5.79117 20.4241 7.81091 19.7007 9.99965 19.7006Z" fill="black"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </a>
+      <!-- Burger Menu Button -->
+      <button class="burger-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer -->
+  <div class="mobile-menu-drawer" id="mobile-menu-drawer">
+    <div class="mobile-drawer-header">
+      <button class="close-drawer-btn" aria-label="Close mobile menu">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L11 11M1 11L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="#about-section" class="mobile-nav-link" data-i18n-link>
+        <span data-i18n-key="storage">STORAGE</span>
+      </a>
+      <a href="#logistics" class="mobile-nav-link" data-i18n-link>
+        <span data-i18n-key="logistics">LOGISTICS</span>
+      </a>
+      <a href="dashboard.html" class="mobile-nav-link" data-i18n-link>
+        <span data-i18n-key="dashboard">DASHBOARD</span>
+      </a>
+      <a href="#about" class="mobile-nav-link" data-i18n-link>
+        <span data-i18n-key="about">ABOUT</span>
+      </a>
+    </nav>
+    <div class="mobile-drawer-auth">
+      <a href="#signup" class="mobile-auth-btn signup-btn" data-i18n-key="signup" aria-label="Sign Up">SIGN UP</a>
+      <a href="#login" class="mobile-auth-btn login-btn" data-i18n-key="login" aria-label="Log In">LOG IN</a>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+  <section id="hero-section">
+    <div class="hero-container">
+      
+      <!-- Left Column: Main Vertical Logo SVG -->
+      <div class="hero-logo-container">
+        <svg class="hero-logo-svg" viewBox="0 0 483.65 341.89" xmlns="http://www.w3.org/2000/svg">
+          <g id="_Слой_1-2" data-name="Слой 1">
+            <g>
+              <path d="M38.06,0h44.33l37.6,165.7h-37.36l-7.19-35.97h-36.44l-7.19,35.97H0L38.06,0ZM69.85,101.88l-12.3-61.73h-.46l-12.53,61.73h25.3Z" fill="black"/>
+              <path d="M101.42,0h48.04c39.45,0,59.64,17.17,59.64,48.27,0,20.65-9.28,35.27-25.76,42.93l29.24,74.5h-39.68l-23.67-65.67h-10.91v65.67h-36.9V0ZM172.2,49.43c0-14.39-7.19-22.05-22.05-22.05h-11.84v44.79h12.07c15.09,0,21.82-7.89,21.82-22.74Z" fill="black"/>
+              <path d="M197.27,0h48.04c39.45,0,59.64,17.17,59.64,48.27,0,20.65-9.28,35.27-25.76,42.93l29.24,74.5h-39.68l-23.67-65.67h-10.91v65.67h-36.9V0ZM268.05,49.43c0-14.39-7.19-22.05-22.05-22.05h-11.84v44.79h12.07c15.09,0,21.82-7.89,21.82-22.74Z" fill="black"/>
+              <path d="M320.97,0h44.33l37.6,165.7h-37.36l-7.19-35.97h-36.44l-7.19,35.97h-31.79L320.97,0ZM352.76,101.88l-12.3-61.73h-.46l-12.53,61.73h25.3Z" fill="black"/>
+              <path d="M402.2,97.94L360.65,0h40.38l22.28,61.27h.23L446.75,0h32.72l-40.15,97.7v68h-37.13v-67.76Z" fill="black"/>
+              <path d="M2.55,173.4h43.4c44.33,0,66.61,25.06,66.61,82.15s-21.81,83.55-67.3,83.55H2.55v-165.7ZM73.8,255.55c0-41.77-8.12-54.07-29.47-54.07h-4.41v109.54h4.41c21.35,0,29.47-13.46,29.47-55.46Z" fill="black"/>
+              <path d="M103.97,173.4h88.65v28.08h-51.29v37.13h32.03v27.62h-32.03v44.79h54.54v28.08h-91.9v-165.7Z" fill="black"/>
+              <path d="M186.13,173.4h45.49c40.38,0,60.34,17.17,60.34,51.52s-20.89,51.05-57.79,51.05h-11.14v63.13h-36.9v-165.7ZM254.82,224.46c0-15.78-7.2-23.44-22.28-23.44h-9.52v47.34h9.52c15.32,0,22.28-7.89,22.28-23.9Z" fill="black"/>
+              <path d="M277.1,256.25c0-54.54,21.81-85.64,59.87-85.64s60.11,31.1,60.11,85.64-21.81,85.64-60.11,85.64-59.87-31.1-59.87-85.64ZM357.4,256.25c0-42.7-5.8-58.72-20.42-58.72s-20.42,16.02-20.42,58.72,5.8,58.71,20.42,58.71,20.42-16.24,20.42-58.71Z" fill="black"/>
+              <path d="M411.47,201.48h-35.27v-28.08h107.45v28.08h-35.04v137.62h-37.13v-137.62Z" fill="black"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Right Column: Text Information & Odometer Counters -->
+      <div class="hero-info-container">
+        <!-- Top Info Block -->
+        <div class="info-top-block">
+          <div class="info-line" data-i18n-key="urban_storage">URBAN STORAGE NETWORK</div>
+          <div class="info-line" data-i18n-key="est">EST. 2026</div>
+          <div class="info-line" data-i18n-key="europe">EUROPE</div>
+        </div>
+
+        <!-- Bottom Stat Block -->
+        <div class="info-bottom-block">
+          <!-- Stat 1: ITEMS STORED -->
+          <div class="stat-group" id="stat-items">
+            <div class="stat-label" data-i18n-key="items_stored">ITEMS STORED:</div>
+            <div class="stat-value odometer" data-type="items" data-value="01582430">
+              <!-- Generated dynamically -->
+            </div>
+          </div>
+
+          <!-- Stat 2: USERS -->
+          <div class="stat-group" id="stat-users">
+            <div class="stat-label" data-i18n-key="users">USERS:</div>
+            <div class="stat-value odometer" data-type="users" data-value="84920">
+              <!-- Generated dynamically -->
+            </div>
+          </div>
+
+          <!-- Stat 3: LOGISTICS ROUTES -->
+          <div class="stat-group" id="stat-routes">
+            <div class="stat-label" data-i18n-key="logistics_routes">LOGISTICS ROUTES:</div>
+            <div class="stat-value odometer" data-type="routes" data-value="12406">
+              <!-- Generated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       ABOUT SECTION & MORPHING MAP
+       ========================================== -->
+  <section id="about-section">
+    <!-- Centered text block -->
+    <div class="about-text-block">
+      <p class="about-text" data-i18n-key="about_text">
+        ARRAY DEPOT provides a high-performance, minimalist storage network across Europe. We operate on-demand lockers and docking depots with real-time inventory tracking and logistics routing integration.
+      </p>
+    </div>
+
+    <!-- Full-width strip: starts as a button, expands into the map -->
+    <div class="map-trigger-area" id="map-trigger-area">
+      <!-- Inline SVG Button Vector -->
+      <svg class="map-button-svg" viewBox="0 0 346 653" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Black background: class added for potential hover width expansion -->
+        <rect class="svg-bg-rect" width="346" height="652.52" fill="black"/>
+        <!-- Top text: VIEW CLOSEST DEPOT — stays fixed -->
+        <path d="M316.951 45.04V21.32H310.871V16.48H329.391V21.32H323.351V45.04H316.951Z" fill="white"/>
+        <path d="M300.915 45.52C294.355 45.52 290.595 40.16 290.595 30.76C290.595 21.36 294.355 16 300.915 16C307.515 16 311.275 21.36 311.275 30.76C311.275 40.16 307.515 45.52 300.915 45.52ZM300.915 40.88C303.435 40.88 304.435 38.08 304.435 30.76C304.435 23.4 303.435 20.64 300.915 20.64C298.395 20.64 297.395 23.4 297.395 30.76C297.395 38.08 298.395 40.88 300.915 40.88Z" fill="white"/>
+        <path d="M271.697 45.04V16.48H279.537C286.497 16.48 289.937 19.44 289.937 25.36C289.937 31.12 286.337 34.16 279.977 34.16H278.057V45.04H271.697ZM279.697 29.4C282.337 29.4 283.537 28.04 283.537 25.28C283.537 22.56 282.297 21.24 279.697 21.24H278.057V29.4H279.697Z" fill="white"/>
+        <path d="M254.343 45.04V16.48H269.623V21.32H260.783V27.72H266.303V32.48H260.783V40.2H270.183V45.04H254.343Z" fill="white"/>
+        <path d="M233.668 45.04V16.48H241.148C248.788 16.48 252.628 20.8 252.628 30.64C252.628 40.24 248.868 45.04 241.028 45.04H233.668ZM240.868 40.2C244.548 40.2 245.948 37.88 245.948 30.64C245.948 23.44 244.548 21.32 240.868 21.32H240.108V40.2H240.868Z" fill="white"/>
+        <path d="M214.971 45.04V21.32H208.891V16.48H227.411V21.32H221.371V45.04H214.971Z" fill="white"/>
+        <path d="M199.408 45.52C194.208 45.52 190.648 42.32 190.248 37.36L195.968 36.24C196.248 39.2 197.648 41 199.688 41C201.328 41 202.448 39.8 202.448 37.96C202.448 36.36 201.568 35.08 199.728 33.96L195.968 31.64C192.528 29.52 190.968 27.12 190.968 23.88C190.968 19.16 194.368 16 199.488 16C204.088 16 207.328 18.52 208.128 22.6L202.848 24.24C202.448 21.84 201.328 20.52 199.608 20.52C198.048 20.52 196.968 21.6 196.968 23.16C196.968 24.64 197.848 25.56 200.368 27.04L203.808 29.08C207.048 31 208.568 33.64 208.568 37C208.568 42.16 204.888 45.52 199.408 45.52Z" fill="white"/>
+        <path d="M174.054 45.04V16.48H189.334V21.32H180.494V27.72H186.014V32.48H180.494V40.2H189.894V45.04H174.054Z" fill="white"/>
+        <path d="M163.371 45.52C158.171 45.52 154.611 42.32 154.211 37.36L159.931 36.24C160.211 39.2 161.611 41 163.651 41C165.291 41 166.411 39.8 166.411 37.96C166.411 36.36 165.531 35.08 163.691 33.96L159.931 31.64C156.491 29.52 154.931 27.12 154.931 23.88C154.931 19.16 158.331 16 163.451 16C168.051 16 171.291 18.52 172.091 22.6L166.811 24.24C166.411 21.84 165.291 20.52 163.571 20.52C162.011 20.52 160.931 21.6 160.931 23.16C160.931 24.64 161.811 25.56 164.331 27.04L167.771 29.08C171.011 31 172.531 33.64 172.531 37C172.531 42.16 168.851 45.52 163.371 45.52Z" fill="white"/>
+        <path d="M143.277 45.52C136.717 45.52 132.957 40.16 132.957 30.76C132.957 21.36 136.717 16 143.277 16C149.877 16 153.637 21.36 153.637 30.76C153.637 40.16 149.877 45.52 143.277 45.52ZM143.277 40.88C145.797 40.88 146.797 38.08 146.797 30.76C146.797 23.4 145.797 20.64 143.277 20.64C140.757 20.64 139.757 23.4 139.757 30.76C139.757 38.08 140.757 40.88 143.277 40.88Z" fill="white"/>
+        <path d="M118.083 45.04V16.48H124.523V40.2H133.323V45.04H118.083Z" fill="white"/>
+        <path d="M107.275 45.52C100.715 45.52 97.1152 40.36 97.1152 30.88C97.1152 21.16 100.675 16 107.355 16C112.915 16 116.075 19.28 116.515 25.64L110.035 26.28C110.115 22.48 109.195 20.64 107.315 20.64C104.915 20.64 103.915 23.52 103.915 30.88C103.915 38.16 104.875 40.88 107.315 40.88C109.315 40.88 110.275 39.2 110.315 35.48L116.515 35.88C116.475 41.84 112.995 45.52 107.275 45.52Z" fill="white"/>
+        <path d="M67.9377 45.04L62.6577 16.48H69.0177L71.9377 37H71.9777L75.0977 16.48H80.9777L83.9777 36.72H84.0177L87.0177 16.48H92.2577L86.8977 45.04H80.3777L77.4577 25.52H77.4177L74.4977 45.04H67.9377Z" fill="white"/>
+        <path d="M47.063 45.04V16.48H62.3431V21.32H53.5031V27.72H59.0231V32.48H53.5031V40.2H62.903V45.04H47.063Z" fill="white"/>
+        <path d="M38.1068 45.04V16.48H44.5468V45.04H38.1068Z" fill="white"/>
+        <path d="M23.5693 45.04L16.6093 16.48H23.1693L27.5293 36.36H27.5693L31.8493 16.48H37.2893L30.3693 45.04H23.5693Z" fill="white"/>
+        <!-- Arrow ONLY: shifts down on hover, does NOT move line or logo -->
+        <g id="svg-arrow-group">
+          <path d="M27.8985 331.778L124.355 350.628L130.313 351.792L130.314 66.52L215.687 66.52L215.687 351.792L221.646 350.628L318.103 331.778L173 523.243L27.8985 331.778Z" fill="white" stroke="white" stroke-width="10"/>
+        </g>
+        <!-- Horizontal line — static, below the arrow -->
+        <path d="M330 547.52V563.52H16.0001V547.52H330Z" fill="white"/>
+        <!-- ARRAY DEPOT bottom text — static -->
+        <g clip-path="url(#clip0_120_265)">
+          <path d="M28.2751 580.449H42.5723L54.699 635.595H42.6497L40.3308 623.624H28.5782L26.2593 635.595H16.0001L28.2751 580.449ZM38.5279 614.355L34.561 593.811H34.4126L30.3714 614.355H38.5311H38.5279Z" fill="white"/>
+          <path d="M48.7098 580.449H64.2036C76.9269 580.449 83.4385 586.163 83.4385 596.513C83.4385 603.386 80.4456 608.251 75.1305 610.801L84.5609 635.595H71.7634L64.1294 613.739H60.6107V635.595H48.7098V580.449ZM71.5376 596.899C71.5376 592.11 69.2187 589.561 64.4261 589.561H60.6075V604.467H64.5003C69.3671 604.467 71.5376 601.841 71.5376 596.899Z" fill="white"/>
+          <path d="M79.6231 580.449H95.1169C107.84 580.449 114.352 586.163 114.352 596.513C114.352 603.386 111.359 608.251 106.044 610.801L115.474 635.595H102.677L95.0427 613.739H91.524V635.595H79.6231V580.449ZM102.451 596.899C102.451 592.11 100.132 589.561 95.3394 589.561H91.5208V604.467H95.4136C100.28 604.467 102.451 601.841 102.451 596.899Z" fill="white"/>
+          <path d="M119.519 580.449H133.816L145.942 635.595H133.893L131.574 623.624H119.822L117.503 635.595H107.25L119.519 580.449ZM129.771 614.355L125.804 593.811H125.656L121.615 614.355H129.775H129.771Z" fill="white"/>
+          <path d="M145.717 613.04L132.316 580.449H145.339L152.525 600.84H152.599L160.085 580.449H170.638L157.689 612.964V635.595H145.713V613.044L145.717 613.04Z" fill="white"/>
+          <path d="M174.84 580.449H188.837C203.135 580.449 210.32 588.789 210.32 607.789C210.32 626.789 203.286 635.595 188.615 635.595H174.843V580.449H174.84ZM197.816 607.789C197.816 593.887 195.197 589.794 188.312 589.794H186.889V626.25H188.312C195.197 626.25 197.816 621.77 197.816 607.792V607.789Z" fill="white"/>
+          <path d="M207.55 580.449H236.141V589.794H219.599V602.151H229.929V611.343H219.599V626.25H237.189V635.595H207.55V580.449Z" fill="white"/>
+          <path d="M234.045 580.449H248.716C261.739 580.449 268.177 586.163 268.177 597.595C268.177 609.027 261.439 614.585 249.538 614.585H245.946V635.595H234.045V580.449ZM256.202 597.438C256.202 592.187 253.879 589.637 249.016 589.637H245.946V605.393H249.016C253.957 605.393 256.202 602.767 256.202 597.438Z" fill="white"/>
+          <path d="M263.387 608.022C263.387 589.87 270.421 579.52 282.696 579.52C294.971 579.52 302.083 589.87 302.083 608.022C302.083 626.173 295.049 636.523 282.696 636.523C270.344 636.523 263.387 626.173 263.387 608.022ZM289.282 608.022C289.282 593.811 287.412 588.479 282.696 588.479C277.981 588.479 276.111 593.811 276.111 608.022C276.111 622.233 277.981 627.561 282.696 627.561C287.412 627.561 289.282 622.156 289.282 608.022Z" fill="white"/>
+          <path d="M306.724 589.794H295.349V580.449H330.003V589.794H318.702V635.595H306.727V589.794H306.724Z" fill="white"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_120_265">
+            <rect width="314" height="57" fill="white" transform="translate(16.0001 579.52)"/>
+          </clipPath>
+        </defs>
+      </svg>
+      <!-- Map loading overlay: shown while Leaflet tiles load -->
+      <div class="map-loading-overlay" id="map-loading-overlay">
+        <span class="map-loading-logo-text">ARRAY DEPOT</span>
+      </div>
+      <button class="map-collapse-btn" id="map-collapse-btn" aria-label="Collapse map">COLLAPSE</button>
+      <button class="map-recenter-btn" id="map-recenter-btn" aria-label="Recenter map to user location">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+          <line x1="12" y1="2" x2="12" y2="4" stroke="currentColor" stroke-width="2"/>
+          <line x1="12" y1="20" x2="12" y2="22" stroke="currentColor" stroke-width="2"/>
+          <line x1="2" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="2"/>
+          <line x1="20" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </button>
+      <div id="map-element"></div>
+      <!-- Depot info side panel (filler - will be designed later) -->
+      <div class="depot-info-panel" id="depot-info-panel">
+        <span class="depot-panel-placeholder">Select a depot to view details</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section between Map and Footer -->
+  <!-- About Section between Map and Footer -->
+  <section class="footer-about-section" id="about">
+    <!-- Column 1: Intro Column -->
+    <div class="about-intro-col">
+      <h2 data-i18n-key="about_title">ABOUT THE NETWORK</h2>
+      <p>ARRAY DEPOT connects more than 6,000 storage facilities across Europe into one unified network. The system provides secure storage solutions for private users and businesses, combining local availability with standardized management processes.</p>
+    </div>
+    
+    <div class="about-country-col">
+      <div class="about-country-container">
+        <img id="about-active-country-img" src="vector/countries/SVG/DE.svg" alt="Active Country Silhouette" />
+      </div>
+    </div>
+
+    <!-- Column 3: Density and Routing Details -->
+    <div class="about-details-col">
+      <h3>DENSITY</h3>
+      <p>Physical items are integrated into a digital logistics ledger. User inventory can be dispatched, consolidated, or routed between any two depots in Europe overnight. Our proprietary routing protocol optimizes truck cargo space, reducing latency and emission footprints.</p>
+      <h3>ROUTING</h3>
+      <p>Our network spans 29 European states. With over 15,000 automated docking lockers and urban depots, we ensure that personal or business assets are always within 5 to 15 minutes of accessibility. We bridge the gap between suburban warehouses and high-density downtown districts.</p>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SITE FOOTER (Negative Space Brutalist)
+       ========================================== -->
+  <footer class="site-footer">
+    
+    <!-- Negative Space Logo Banner -->
+    <div class="footer-logo-banner">
+      <svg class="footer-logo-svg" viewBox="0 0 982.9 171.27" xmlns="http://www.w3.org/2000/svg">
+        <path d="M38.06,2.79h44.33l37.6,165.7h-37.36l-7.19-35.97h-36.44l-7.19,35.97H0L38.06,2.79ZM69.85,104.67l-12.3-61.73h-.46l-12.53,61.73h25.3Z"/>
+        <path d="M101.42,2.79h48.04c39.45,0,59.64,17.17,59.64,48.27,0,20.65-9.28,35.27-25.76,42.93l29.24,74.5h-39.68l-23.67-65.67h-10.91v65.67h-36.9V2.79ZM172.2,52.22c0-14.39-7.19-22.05-22.05-22.05h-11.84v44.79h12.07c15.09,0,21.82-7.89,21.82-22.74Z"/>
+        <path d="M197.27,2.79h48.04c39.45,0,59.64,17.17,59.64,48.27,0,20.65-9.28,35.27-25.76,42.93l29.24,74.5h-39.68l-23.67-65.67h-10.91v65.67h-36.9V2.79ZM268.05,52.22c0-14.39-7.19-22.05-22.05-22.05h-11.84v44.79h12.07c15.09,0,21.82-7.89,21.82-22.74Z"/>
+        <path d="M320.97,2.79h44.33l37.6,165.7h-37.36l-7.19-35.97h-36.44l-7.19,35.97h-31.79L320.97,2.79ZM352.76,104.67l-12.3-61.73h-.46l-12.53,61.73h25.3Z"/>
+        <path d="M402.2,100.72L360.65,2.79h40.38l22.28,61.27h.23l23.21-61.27h32.72l-40.15,97.7v68h-37.13v-67.76Z"/>
+        <path d="M501.81,2.79h43.4c44.33,0,66.61,25.06,66.61,82.15s-21.81,83.55-67.3,83.55h-42.7V2.79ZM573.05,84.94c0-41.77-8.12-54.07-29.47-54.07h-4.41v109.54h4.41c21.35,0,29.47-13.46,29.47-55.46Z"/>
+        <path d="M603.23,2.79h88.65v28.08h-51.29v37.13h32.03v27.62h-32.03v44.79h54.54v28.08h-91.9V2.79Z"/>
+        <path d="M685.38,2.79h45.49c40.38,0,60.34,17.17,60.34,51.52s-20.89,51.05-57.79,51.05h-11.14v63.13h-36.9V2.79ZM754.08,53.84c0-15.78-7.2-23.44-22.28-23.44h-9.52v47.34h9.52c15.32,0,22.28-7.89,22.28-23.9Z"/>
+        <path d="M776.36,85.64c0-54.54,21.81-85.64,59.87-85.64s60.11,31.1,60.11,85.64-21.81,85.64-60.11,85.64-59.87-31.1-59.87-85.64ZM856.65,85.64c0-42.7-5.8-58.72-20.42-58.72s-20.42,16.02-20.42,58.72,5.8,58.71,20.42,58.71,20.42-16.24,20.42-58.71Z"/>
+        <path d="M910.73,30.87h-35.27V2.79h107.45v28.08h-35.04v137.62h-37.13V30.87Z"/>
+      </svg>
+    </div>
+
+    <!-- Main Footer Content -->
+    <div class="footer-content-wrapper">
+      <div class="footer-columns">
+        
+        <!-- Left Side: Brand Slogan & Newsletter -->
+        <div class="footer-brand-column">
+          <h3 class="footer-slogan">DECENTRALIZED STORAGE.<br>BUILT FOR EFFICIENCY.</h3>
+          <p class="footer-desc">High-performance warehouse lockers and logistics routing network across the European Union.</p>
+          
+          <div class="footer-newsletter">
+            <span class="newsletter-title">SUBSCRIBE TO ARRAY DISPATCH</span>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+              <input type="email" class="newsletter-input" placeholder="ENTER YOUR EMAIL" required>
+              <button type="submit" class="newsletter-btn">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/>
+                </svg>
+              </button>
+            </form>
+          </div>
+
+          <div class="footer-socials">
+            <a href="#" class="social-link">FB</a>
+            <a href="#" class="social-link">IG</a>
+            <a href="#" class="social-link">TW</a>
+            <a href="#" class="social-link">LN</a>
+          </div>
+        </div>
+
+        <!-- Right Side: Links & Technical Metrics -->
+        <div class="footer-links-column">
+          <div class="links-subgrid">
+            
+            <!-- Navigation -->
+            <div class="links-block">
+              <span class="links-title">NAVIGATION</span>
+              <ul class="links-list">
+                <li><a href="#about-section">STORAGE LOCATIONS</a></li>
+                <li><a href="#logistics">LOGISTICS NETWORK</a></li>
+                <li><a href="dashboard.html">SYSTEM DASHBOARD</a></li>
+                <li><a href="#about">ABOUT ARRAY</a></li>
+              </ul>
+            </div>
+
+            <!-- Support & Docs -->
+            <div class="links-block">
+              <span class="links-title">RESOURCES</span>
+              <ul class="links-list">
+                <li><a href="#">SYSTEM STATUS</a></li>
+                <li><a href="#">API DOCUMENTATION</a></li>
+                <li><a href="#">SECURITY AUDIT</a></li>
+                <li><a href="#">LOGISTICS SUPPORT</a></li>
+              </ul>
+            </div>
+
+            <!-- Network Metrics -->
+            <div class="links-block">
+              <span class="links-title">NETWORK METRICS</span>
+              <ul class="metrics-list">
+                <li><span class="metric-lbl" data-i18n-key="items_stored">ITEMS STORED:</span> <span class="metric-val" id="footer-items-val">01 582 430</span></li>
+                <li><span class="metric-lbl" data-i18n-key="users">USERS:</span> <span class="metric-val" id="footer-users-val">84 920</span></li>
+                <li><span class="metric-lbl" data-i18n-key="logistics_routes">LOGISTICS ROUTES:</span> <span class="metric-val" id="footer-routes-val">12 406</span></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <span class="copyright-text">© 2026 ARRAY DEPOT ATELIER. ROOTED IN SYSTEM LOGISTICS, REFINED THROUGH CODE.</span>
+        <span class="design-credits">SYS LEVEL: ACTIVE</span>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Odometer & Scroll Trigger Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Intersection Observer for Scroll-Activated Header Logo
+      const header = document.querySelector('.site-header');
+      const heroLogo = document.querySelector('.hero-logo-container');
+      
+      if (header && heroLogo) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+              header.classList.add('scrolled');
+            } else {
+              header.classList.remove('scrolled');
+            }
+          });
+        }, {
+          root: null, // Viewport
+          threshold: 0,
+          rootMargin: '-26px 0px 0px 0px' // Trigger exactly when passing header
+        });
+        
+        observer.observe(heroLogo);
+      }
+
+      // 2. Odometer Counter Engine
+      class Odometer {
+        constructor(element) {
+          this.element = element;
+          this.type = element.getAttribute('data-type');
+          this.value = parseInt(element.getAttribute('data-value'), 10);
+          this.digits = [];
+          this.init();
+        }
+
+        // Format number with correct padding and spaces
+        format(value) {
+          if (this.type === 'items') {
+            return String(value).padStart(8, '0').replace(/^(\d{2})(\d{3})(\d{3})$/, '$1 $2 $3');
+          } else {
+            return String(value).replace(/^(\d+)(\d{3})$/, '$1 $2');
+          }
+        }
+
+        init() {
+          this.element.innerHTML = '';
+          const formattedStr = this.format(this.value);
+          this.digits = [];
+          
+          for (let i = 0; i < formattedStr.length; i++) {
+            const char = formattedStr[i];
+            if (char === ' ') {
+              const space = document.createElement('span');
+              space.className = 'odometer-space';
+              space.innerHTML = '&nbsp;';
+              this.element.appendChild(space);
+              this.digits.push({ type: 'space', element: space });
+            } else {
+              const container = document.createElement('span');
+              container.className = 'digit-container';
+              
+              const strip = document.createElement('span');
+              strip.className = 'digit-strip';
+              
+              for (let d = 0; d <= 9; d++) {
+                const digitSpan = document.createElement('span');
+                digitSpan.innerText = d;
+                strip.appendChild(digitSpan);
+              }
+              
+              container.appendChild(strip);
+              this.element.appendChild(container);
+              
+              const digitVal = parseInt(char, 10);
+              strip.style.transform = `translateY(-${digitVal * 0.8}em)`;
+              this.digits.push({ type: 'digit', element: strip, value: digitVal });
+            }
+          }
+        }
+
+        update(newValue) {
+          const oldFormatted = this.format(this.value);
+          const newFormatted = this.format(newValue);
+          this.value = newValue;
+          this.element.setAttribute('data-value', newValue);
+
+          // Re-initialize if the number length increases (e.g. shifts decimal positions)
+          if (oldFormatted.length !== newFormatted.length) {
+            this.init();
+            return;
+          }
+
+          for (let i = 0; i < newFormatted.length; i++) {
+            const oldChar = oldFormatted[i];
+            const newChar = newFormatted[i];
+            if (oldChar !== newChar && this.digits[i].type === 'digit') {
+              const digitVal = parseInt(newChar, 10);
+              this.digits[i].value = digitVal;
+              this.digits[i].element.style.transform = `translateY(-${digitVal * 0.8}em)`;
+            }
+          }
+        }
+      }
+
+      // Initialize all odometer elements
+      const odometers = Array.from(document.querySelectorAll('.odometer')).map(el => new Odometer(el));
+
+      // Sync initial odometer values to footer
+      odometers.forEach(odo => {
+        const footerVal = document.getElementById(`footer-${odo.type}-val`);
+        if (footerVal) {
+          footerVal.textContent = odo.format(odo.value);
+        }
+      });
+
+      // 3. Realistic counter updates
+      // ITEMS STORED: increments by 1-3 every 1.5 to 4 seconds
+      function tickItems() {
+        const odo = odometers.find(o => o.type === 'items');
+        if (odo) {
+          const increment = Math.floor(Math.random() * 3) + 1;
+          const newVal = odo.value + increment;
+          odo.update(newVal);
+          const footerVal = document.getElementById('footer-items-val');
+          if (footerVal) {
+            footerVal.textContent = odo.format(newVal);
+          }
+        }
+        const nextInterval = (Math.random() * 2500) + 1500;
+        setTimeout(tickItems, nextInterval);
+      }
+
+      // USERS: increments by 1 every 6 to 15 seconds
+      function tickUsers() {
+        const odo = odometers.find(o => o.type === 'users');
+        if (odo) {
+          const newVal = odo.value + 1;
+          odo.update(newVal);
+          const footerVal = document.getElementById('footer-users-val');
+          if (footerVal) {
+            footerVal.textContent = odo.format(newVal);
+          }
+        }
+        const nextInterval = (Math.random() * 9000) + 6000;
+        setTimeout(tickUsers, nextInterval);
+      }
+
+      // LOGISTICS ROUTES: increments by 1 every 15 to 35 seconds
+      function tickRoutes() {
+        const odo = odometers.find(o => o.type === 'routes');
+        if (odo) {
+          const newVal = odo.value + 1;
+          odo.update(newVal);
+          const footerVal = document.getElementById('footer-routes-val');
+          if (footerVal) {
+            footerVal.textContent = odo.format(newVal);
+          }
+        }
+        const nextInterval = (Math.random() * 20000) + 15000;
+        setTimeout(tickRoutes, nextInterval);
+      }
+
+      // Run loops
+      setTimeout(tickItems, 2000);
+      setTimeout(tickUsers, 4000);
+      setTimeout(tickRoutes, 8000);
+
+      // 4. I18n Translation Dictionary
+      const translations = {
+        UK: {
+          storage: "STORAGE",
+          logistics: "LOGISTICS",
+          dashboard: "DASHBOARD",
+          about: "ABOUT",
+          urban_storage: "URBAN STORAGE NETWORK",
+          est: "EST. 2026",
+          europe: "EUROPE",
+          items_stored: "ITEMS STORED:",
+          users: "USERS:",
+          logistics_routes: "LOGISTICS ROUTES:",
+          about_title: "About The Network",
+          view_depots: "View Closest Depot",
+          about_text: "ARRAY DEPOT provides a high-performance, minimalist storage network across europe. we operate on-demand lockers and docking depots with real-time inventory tracking and logistics routing integration."
+        },
+        AT: {
+          storage: "LAGERUNG",
+          logistics: "LOGISTIK",
+          dashboard: "DASHBOARD",
+          about: "ÜBER UNS",
+          urban_storage: "STÄDTISCHES LAGERNETZWERK",
+          est: "GEGR. 2026",
+          europe: "EUROPA",
+          items_stored: "GELAGERTE ARTIKEL:",
+          users: "BENUTZER:",
+          logistics_routes: "LOGISTIKROUTEN:",
+          about_title: "Über Das Netzwerk",
+          view_depots: "Nächstes Depot Anzeigen",
+          about_text: "ARRAY DEPOT bietet ein hochleistungsfähiges, minimalistisches lagernetzwerk in ganz europa. wir betreiben on-demand-schliessfächer und docking-depots mit inventarverfolgung in echtzeit und logistikintegration."
+        },
+        BA: {
+          storage: "SKLADIŠTENJE",
+          logistics: "LOGISTIKA",
+          dashboard: "KONTROLNA TABLA",
+          about: "O NAMA",
+          urban_storage: "GRADSKA SKLADIŠNA MREŽA",
+          est: "OSNOVANO 2026.",
+          europe: "EVROPA",
+          items_stored: "POHRANJENI PREDMETI:",
+          users: "KORISNICI:",
+          logistics_routes: "LOGISTIČKE RUTE:",
+          about_title: "O Mreži",
+          view_depots: "Prikaži Najbliže Skladište",
+          about_text: "ARRAY DEPOT pruža visoko performansnu, minimalističku skladišnu mrežu širom evrope. upravljamo ormarićima na zahtjev i depotima sa praćenjem zaliha u stvarnom vremenu i logističkom integracijom."
+        },
+        BE: {
+          storage: "OPSLAG",
+          logistics: "LOGISTIEK",
+          dashboard: "DASHBOARD",
+          about: "OVER",
+          urban_storage: "STEDELIJK OPSLAGNETWERK",
+          est: "OPGERICHT 2026",
+          europe: "EUROPA",
+          items_stored: "OPGESLAGEN ARTIKELEN:",
+          users: "GEBRUIKERS:",
+          logistics_routes: "LOGISTIEKE ROUTES:",
+          about_title: "Over Het Netwerk",
+          view_depots: "Toon Dichtste Depot",
+          about_text: "ARRAY DEPOT biedt een hoogwaardig, minimalistisch opslagnetwerk in europa. wij exploiteren on-demand lockers en docking depots met real-time inventaristracking en logistieke integratie."
+        },
+        BG: {
+          storage: "STORAGE",
+          logistics: "LOGISTICS",
+          dashboard: "DASHBOARD",
+          about: "ABOUT",
+          urban_storage: "URBAN STORAGE NETWORK",
+          est: "EST. 2026",
+          europe: "EUROPE",
+          items_stored: "ITEMS STORED:",
+          users: "USERS:",
+          logistics_routes: "LOGISTICS ROUTES:",
+          about_title: "About The Network",
+          view_depots: "View Closest Depot",
+          about_text: "ARRAY DEPOT provides a high-performance, minimalist storage network across europe. we operate on-demand lockers and docking depots with real-time inventory tracking and logistics routing integration."
+        },
+        CH: {
+          storage: "LAGERUNG",
+          logistics: "LOGISTIK",
+          dashboard: "DASHBOARD",
+          about: "ÜBER UNS",
+          urban_storage: "STÄDTISCHES LAGERNETZWERK",
+          est: "GEGR. 2026",
+          europe: "EUROPA",
+          items_stored: "GELAGERTE ARTIKEL:",
+          users: "BENUTZER:",
+          logistics_routes: "LOGISTIKROUTEN:",
+          about_title: "Über Das Netzwerk",
+          view_depots: "Nächstes Depot Anzeigen",
+          about_text: "ARRAY DEPOT bietet ein hochleistungsfähiges, minimalistisches lagernetzwerk in ganz europa. wir betreiben on-demand-schliessfächer und docking-depots mit inventarverfolgung in echtzeit und logistikintegration."
+        },
+        CR: {
+          storage: "SKLADIŠTENJE",
+          logistics: "LOGISTIKA",
+          dashboard: "NADZORNA PLOČA",
+          about: "O NAMA",
+          urban_storage: "GRADSKA SKLADIŠNA MREŽA",
+          est: "UTEMELJENO 2026.",
+          europe: "EUROPA",
+          items_stored: "POHRANJENI PREDMETI:",
+          users: "KORISNICI:",
+          logistics_routes: "LOGISTIČKE RUTE:",
+          about_title: "O Mreži",
+          view_depots: "Prikaži Najbliže Skladište",
+          about_text: "ARRAY DEPOT pruža visoko performansnu, minimalističku skladišnu mrežu širom europe. upravljamo skrinjicama na zahtjev i depotima sa praćenjem zaliha u stvarnom vremenu i logističkom integracijom."
+        },
+        CZ: {
+          storage: "SKLADOVÁNÍ",
+          logistics: "LOGISTIKA",
+          dashboard: "NÁSTĚNKA",
+          about: "O NÁS",
+          urban_storage: "MĚSTSKÁ SKLADOVACÍ SÍŤ",
+          est: "ZAL. 2026",
+          europe: "EVROPA",
+          items_stored: "ULOŽENÉ POLOŽKY:",
+          users: "UŽIVATELÉ:",
+          logistics_routes: "LOGISTICKÉ TRASY:",
+          about_title: "O Síti",
+          view_depots: "Zobrazit Nejbližší Depot",
+          about_text: "ARRAY DEPOT poskytuje vysoce výkonnou, minimalistickou skladovací síť po celé evropě. provozujeme skříňky na vyžádání a dock depoty s sledováním inventáře v reálném čase a logistickou integrací."
+        },
+        DE: {
+          storage: "LAGERUNG",
+          logistics: "LOGISTIK",
+          dashboard: "DASHBOARD",
+          about: "ÜBER UNS",
+          urban_storage: "STÄDTISCHES LAGERNETZWERK",
+          est: "GEGR. 2026",
+          europe: "EUROPA",
+          items_stored: "GELAGERTE ARTIKEL:",
+          users: "BENUTZER:",
+          logistics_routes: "LOGISTIKROUTEN:",
+          about_title: "Über Das Netzwerk",
+          view_depots: "Nächstes Depot Anzeigen",
+          about_text: "ARRAY DEPOT bietet ein hochleistungsfähiges, minimalistisches lagernetzwerk in ganz europa. wir betreiben on-demand-schliessfächer und docking-depots mit inventarverfolgung in echtzeit und logistikintegration."
+        },
+        DK: {
+          storage: "LAGRING",
+          logistics: "LOGISTIK",
+          dashboard: "DASHBOARD",
+          about: "OM",
+          urban_storage: "URBANT LAGRENETVÆRK",
+          est: "ETABLERET 2026",
+          europe: "EUROPA",
+          items_stored: "LAGREDE GENSTANDE:",
+          users: "BRUGERE:",
+          logistics_routes: "LOGISTIKRUTER:",
+          about_title: "Om Netværket",
+          view_depots: "Vis Nermeste Depot",
+          about_text: "ARRAY DEPOT tilbyder et højpresterende, minimalistisk lagrenetværk over europa. vi driver bokse og depoter på anmodning med realtidsinventering og logistikintegration."
+        },
+        EE: {
+          storage: "LADUSTAMINE",
+          logistics: "LOGISTIKA",
+          dashboard: "TÖÖLAUD",
+          about: "MEIST",
+          urban_storage: "LINNALADUDE VÕRGUSTIK",
+          est: "ASUTATUD 2026",
+          europe: "EUROOPA",
+          items_stored: "HOIUSTATUD ESEMED:",
+          users: "KASUTAJAD:",
+          logistics_routes: "LOGISTIKAMARŠRUUDID:",
+          about_title: "Võrgustikust",
+          view_depots: "Näita Lähimat Depood",
+          about_text: "ARRAY DEPOT pakub kõrge jõudlusega minimalistlikku linnaladude võrgustikku euroopas. opereerime nõudmisel kappide ja ladudega, millel on reaalajas kättesaadavus ja logistikaintegratsioon."
+        },
+        ES: {
+          storage: "ALMACENAMIENTO",
+          logistics: "LOGÍSTICA",
+          dashboard: "PANEL",
+          about: "SOBRE NOSOTROS",
+          urban_storage: "RED DE ALMACENAMIENTO URBANO",
+          est: "EST. 2026",
+          europe: "EUROPA",
+          items_stored: "ARTÍCULOS ALMACENADOS:",
+          users: "USUARIOS:",
+          logistics_routes: "RUTAS LOGÍSTICAS:",
+          about_title: "Sobre La Red",
+          view_depots: "Ver Depósito Cercano",
+          about_text: "ARRAY DEPOT ofrece una red de almacenamiento minimalista de alto rendimiento en toda europa. operamos taquillas y depósitos bajo demanda con seguimiento de inventario en tiempo real e integración logística."
+        },
+        FI: {
+          storage: "VARASTOINTI",
+          logistics: "LOGISTIIKKA",
+          dashboard: "OHJAUSPANEELI",
+          about: "TIETOA",
+          urban_storage: "KAUPUNKIVARASTOVERKKO",
+          est: "PERUSTETTU 2026",
+          europe: "EUROOPPA",
+          items_stored: "VARASTOIDUT TAVARAT:",
+          users: "KÄYTTÄJÄT:",
+          logistics_routes: "LOGISTIIKKAREITIT:",
+          about_title: "Tietoa Verkosta",
+          view_depots: "Näytä Lähin Varasto",
+          about_text: "ARRAY DEPOT tarjoaa korkean suorituskyvyn minimalistisen varastoverkon koko euroopassa. ylläpidämme tarpeen mukaisia kaappeja ja depoteita reaaliaikaisella varaston seurannalla ja logistiikkapalveluilla."
+        },
+        FR: {
+          storage: "STOCKAGE",
+          logistics: "LOGISTIQUE",
+          dashboard: "TABLEAU DE BORD",
+          about: "À PROPOS",
+          urban_storage: "RÉSEAU DE STOCKAGE URBAIN",
+          est: "EST. 2026",
+          europe: "EUROPE",
+          items_stored: "ARTICLES STOCKÉS:",
+          users: "UTILISATEURS:",
+          logistics_routes: "ROUTES LOGISTIQUES:",
+          about_title: "À Propos Du Réseau",
+          view_depots: "Voir Le Dépôt Proche",
+          about_text: "ARRAY DEPOT fournit un réseau de stockage minimaliste et haute performance à travers l'europe. nous exploitons des casiers et des dépôts à la demande avec suivi des stocks en temps réel et intégration logistique."
+        },
+        GR: {
+          storage: "STORAGE",
+          logistics: "LOGISTICS",
+          dashboard: "DASHBOARD",
+          about: "ABOUT",
+          urban_storage: "URBAN STORAGE NETWORK",
+          est: "EST. 2026",
+          europe: "EUROPE",
+          items_stored: "ITEMS STORED:",
+          users: "USERS:",
+          logistics_routes: "LOGISTICS ROUTES:",
+          about_title: "About The Network",
+          view_depots: "View Closest Depot",
+          about_text: "ARRAY DEPOT provides a high-performance, minimalist storage network across europe. we operate on-demand lockers and docking depots with real-time inventory tracking and logistics routing integration."
+        },
+        HU: {
+          storage: "TÁROLÁS",
+          logistics: "LOGISZTIKA",
+          dashboard: "VEZÉRLŐPULT",
+          about: "NÉVJEGY",
+          urban_storage: "VÁROSI TÁROLÓ HÁLÓZAT",
+          est: "ALAPÍTVA 2026",
+          europe: "EURÓPA",
+          items_stored: "TÁROLT TÉTELEK:",
+          users: "FELHASZNÁLÓK:",
+          logistics_routes: "LOGISZTIKAI ÚTVONALAK:",
+          about_title: "A Hálózatról",
+          view_depots: "Legközelebbi Depó",
+          about_text: "AZ ARRAY DEPOT csúcsteljesítményű, minimalista tároló hálózatot biztosít európa-szerte. igény szerinti rekeszeket és depókat üzemeltetünk valós idejű készletkövetéssel és logisztikai integrációval."
+        },
+        IE: {
+          storage: "STÓRÁIL",
+          logistics: "LÓISTÍOCHT",
+          dashboard: "DASHBOARD",
+          about: "FAOI",
+          urban_storage: "LÍONRA STÓRÁLA UIRBEACH",
+          est: "EST. 2026",
+          europe: "AN EORAIP",
+          items_stored: "MÍREANNA STÓRÁILTE:",
+          users: "ÚSÁIDEOIRÍ:",
+          logistics_routes: "RÚTAÍ LÓISTÍOCHTA:",
+          about_title: "About The Network",
+          view_depots: "View Closest Depot",
+          about_text: "ARRAY DEPOT provides a high-performance, minimalist storage network across europe. we operate on-demand lockers and docking depots with real-time inventory tracking and logistics routing integration."
+        },
+        IT: {
+          storage: "STOCCAGGIO",
+          logistics: "LOGISTICA",
+          dashboard: "DASHBOARD",
+          about: "INFO",
+          urban_storage: "RETE DI STOCCAGGIO URBANA",
+          est: "FONDATO NEL 2026",
+          europe: "EUROPA",
+          items_stored: "ARTICOLI STOCCATI:",
+          users: "UTENTI:",
+          logistics_routes: "ROTTE LOGISTICHE:",
+          about_title: "Sulla Rete",
+          view_depots: "Mostra Deposito Vicino",
+          about_text: "ARRAY DEPOT offre una rete di stoccaggio urbana minimalista e ad alte prestazioni in tutta europa. gestiamo cassette di sicurezza e depositi su richiesta con tracciamento in tempo reale e integrazione logistica."
+        },
+        LT: {
+          storage: "SANDĖLIAVIMAS",
+          logistics: "LOGISTIKA",
+          dashboard: "VALDYMO SKYDAS",
+          about: "APIE",
+          urban_storage: "MIESTO SANDĖLIŲ TINKLAS",
+          est: "ĮKURTA 2026",
+          europe: "EUROPA",
+          items_stored: "SAUGOMI DAIKTAI:",
+          users: "NAUDOTOJAI:",
+          logistics_routes: "LOGISTIKOS MARŠRUTAI:",
+          about_title: "Apie Tinklą",
+          view_depots: "Rodyti Artimiausią Sandėlį",
+          about_text: "ARRAY DEPOT teikia aukšto našumo, minimalistinį sandėlių tinklą europoje. valdome lockerius ir sandėlius pagal poreikį su realiaus laiko atsargų sekimu ir logistikos integracija."
+        },
+        LV: {
+          storage: "UZGLABĀŠANA",
+          logistics: "LOĢISTIKA",
+          dashboard: "INFORMĀCIJAS PANELS",
+          about: "PAR MUMS",
+          urban_storage: "PILSĒTAS UZGLABĀŠANAS TĪKLS",
+          est: "DIBINĀTS 2026",
+          europe: "EIROPA",
+          items_stored: "UZGLABĀTIE PRIEKŠMETI:",
+          users: "LIETOTĀJI:",
+          logistics_routes: "LOĢISTIKAS MARŠRUTI:",
+          about_title: "Par Tīklu",
+          view_depots: "Rādīt Tuvāko Depot",
+          about_text: "ARRAY DEPOT nodrošina augstas veiktspējas, minimālistisku uzglabāšanas tīklu eiropā. mēs nodrošinām skapīšus un depot pēc pieprasījuma ar reālā laika inventāra izsekošanu un loģistikas integrāciju."
+        },
+        NL: {
+          storage: "OPSLAG",
+          logistics: "LOGISTIEK",
+          dashboard: "DASHBOARD",
+          about: "OVER",
+          urban_storage: "STEDELIJK OPSLAGNETWERK",
+          est: "OPGERICHT 2026",
+          europe: "EUROPA",
+          items_stored: "OPGESLAGEN ARTIKELEN:",
+          users: "GEBRUIKERS:",
+          logistics_routes: "LOGISTIEKE ROUTES:",
+          about_title: "Over Het Netwerk",
+          view_depots: "Toon Dichtste Depot",
+          about_text: "ARRAY DEPOT biedt een hoogwaardig, minimalistisch opslagnetwerk in europa. wij exploiteren on-demand lockers en docking depots met real-time inventaristracking en logistieke integratie."
+        },
+        NO: {
+          storage: "LAGRING",
+          logistics: "LOGISTIKK",
+          dashboard: "DASHBOARD",
+          about: "OM OSS",
+          urban_storage: "URBANT LAGRINGSNETTVERK",
+          est: "ETABLERT 2026",
+          europe: "EUROPA",
+          items_stored: "LAGREDE ARTIKLER:",
+          users: "BRUKERE:",
+          logistics_routes: "LOGISTIKKRUTER:",
+          about_title: "Om Nettverket",
+          view_depots: "Vis Nærmeste Depot",
+          about_text: "ARRAY DEPOT tilbyr et høypresterende, minimalistisk lagringsnettverk over europa. vi driver skap og depoter på forespørsel med realtidsinventering och logistikkintegrasjon."
+        },
+        PL: {
+          storage: "MAGAZYNOWANIE",
+          logistics: "LOGISTYKA",
+          dashboard: "PANEL",
+          about: "O NAS",
+          urban_storage: "MIEJSKA SIEĆ MAGAZYNOWA",
+          est: "ZAŁ. 2026",
+          europe: "EUROPA",
+          items_stored: "PRZECHOWYWANE PRZEDMIOTY:",
+          users: "UŻYTKOWNICY:",
+          logistics_routes: "TRASY LOGISTYCZNE:",
+          about_title: "O Síti",
+          view_depots: "Pokaż Najbliższy Depozyt",
+          about_text: "ARRAY DEPOT oferuje wydajną, minimalistyczną sieć magazynową w całej europie. operujemy skrytkami na żądanie i depozytami z trackingiem w czasie rzeczywistym i integracją logistyczną."
+        },
+        PT: {
+          storage: "ARMAZENAMENTO",
+          logistics: "LOGÍSTICA",
+          dashboard: "PAINEL",
+          about: "SOBRE",
+          urban_storage: "REDE DE ARMAZENAMENTO URBANO",
+          est: "EST. 2026",
+          europe: "EUROPA",
+          items_stored: "ITENS ARMAZENADOS:",
+          users: "UTILIZADORES:",
+          logistics_routes: "ROTAS LOGÍSTICAS:",
+          about_title: "Sobre A Rede",
+          view_depots: "Ver Depósito Próximo",
+          about_text: "ARRAY DEPOT oferece uma rede de armazenamento minimalista de alto desempenho em toda a europa. operamos lockers e depósitos sob demanda com rastreamento de inventário em tempo real e integração logística."
+        },
+        RO: {
+          storage: "DEPOZITARE",
+          logistics: "LOGISTICĂ",
+          dashboard: "PANOU",
+          about: "DESPRE",
+          urban_storage: "REȚEA DE DEPOZITARE URBANĂ",
+          est: "FONDAT ÎN 2026",
+          europe: "EUROPA",
+          items_stored: "ARTICOLE DEPOZITATE:",
+          users: "UTILIZATORI:",
+          logistics_routes: "RUTE LOGISTICE:",
+          about_title: "Despre Rețea",
+          view_depots: "Vezi Cel Mai Apropiat Depozit",
+          about_text: "ARRAY DEPOT oferă o rețea de depozitare minimalistă de înaltă performanță în toată europa. operăm dock depot-uri și dulapuri la cerere cu urmărire în timp real și integrare logistică."
+        },
+        RS: {
+          storage: "STORAGE",
+          logistics: "LOGISTICS",
+          dashboard: "DASHBOARD",
+          about: "ABOUT",
+          urban_storage: "URBAN STORAGE NETWORK",
+          est: "EST. 2026",
+          europe: "EUROPE",
+          items_stored: "ITEMS STORED:",
+          users: "USERS:",
+          logistics_routes: "LOGISTICS ROUTES:",
+          about_title: "About The Network",
+          view_depots: "View Closest Depot",
+          about_text: "ARRAY DEPOT provides a high-performance, minimalist storage network across europe. we operate on-demand lockers and docking depots with real-time inventory tracking and logistics routing integration."
+        },
+        SE: {
+          storage: "LAGRING",
+          logistics: "LOGISTIK",
+          dashboard: "DASHBOARD",
+          about: "OM",
+          urban_storage: "URBANT LAGRINGSNÄTVERK",
+          est: "ETABLERAT 2026",
+          europe: "EUROPA",
+          items_stored: "LAGRADE ARTIKLAR:",
+          users: "ANVÄNDARE:",
+          logistics_routes: "LOGISTIKRUTER:",
+          about_title: "Om Nätverket",
+          view_depots: "Visa Närmaste Depå",
+          about_text: "ARRAY DEPOT erbjuder ett högpresterande, minimalistiskt lagringsnätverk över europa. vi driver lockers och depåer på begäran med realtidsinventering och logistikintegration."
+        },
+        SI: {
+          storage: "SKLADIŠČENJE",
+          logistics: "LOGISTIKA",
+          dashboard: "NADZORNA PLOŠČA",
+          about: "O NAS",
+          urban_storage: "MESTNO SKLADIŠČNO OMREŽJE",
+          est: "USTANOVLJENO 2026",
+          europe: "EVROPA",
+          items_stored: "SHRANJENI PREDMETI:",
+          users: "UPORABNIKI:",
+          logistics_routes: "LOGISTIČNE POTI:",
+          about_title: "O Omrežju",
+          view_depots: "Prikaži Nabližji Depot",
+          about_text: "ARRAY DEPOT zagotavlja visoko zmogljivo, minimalistično skladiščno omrežje po evropi. upravljamo s skrinjicami na zahtevo in depoti z realnočasovnim sledenjem in logistično integracijo."
+        },
+        SK: {
+          storage: "SKLADOVANIE",
+          logistics: "LOGISTIKA",
+          dashboard: "PANEL",
+          about: "O NÁS",
+          urban_storage: "MESTSKÁ SKLADOVACÍ SÍŤ",
+          est: "ZAL. 2026",
+          europe: "EURÓPA",
+          items_stored: "ULOŽENÉ POLOŽKY:",
+          users: "UŽÍVATELIA:",
+          logistics_routes: "LOGISTICKÉ TRASY:",
+          about_title: "O Síti",
+          view_depots: "Zobraziť Najbližší Depot",
+          about_text: "ARRAY DEPOT poskytuje vysoko výkonnú, minimalistickú skladovaciu sieť po celej európe. prevádzkujeme skrinky na vyžiadanie a dock depoty s sledovaním inventáru v reálnom čase a logistickou integráciou."
+        }
+      };
+
+      // Merge extra translations (signup / login) for mobile menu drawer
+      const authTranslations = {
+        UK: { signup: "SIGN UP", login: "LOG IN" },
+        AT: { signup: "REGISTRIEREN", login: "ANMELDEN" },
+        BA: { signup: "REGISTRACIJA", login: "PRIJAVA" },
+        BE: { signup: "REGISTREREN", login: "INLOGGEN" },
+        BG: { signup: "SIGN UP", login: "LOG IN" },
+        CH: { signup: "REGISTRIEREN", login: "ANMELDEN" },
+        CR: { signup: "REGISTRACIJA", login: "PRIJAVA" },
+        CZ: { signup: "REGISTRACE", login: "PŘIHLÁSIT SE" },
+        DE: { signup: "REGISTRIEREN", login: "ANMELDEN" },
+        DK: { signup: "REGISTRER", login: "LOG IND" },
+        EE: { signup: "REGISTREERU", login: "LOGI SISSE" },
+        ES: { signup: "REGISTRARSE", login: "INICIAR SESIÓN" },
+        FI: { signup: "REKISTERÖIDY", login: "KIRJAUDU SISÄÄN" },
+        FR: { signup: "S'INSCRIRE", login: "SE CONNECTER" },
+        GR: { signup: "ΕΓΓΡΑΦΗ", login: "ΣΥΝΔΕΣΗ" },
+        HU: { signup: "REGISZTRÁCIÓ", login: "BEJELENTKEZÉS" },
+        IE: { signup: "CLÁRAIGH", login: "LOGÁIL ISTEACH" },
+        IT: { signup: "REGISTRATI", login: "ACCEDI" },
+        LT: { signup: "REGISTRUOTIS", login: "PRISIJUNGTI" },
+        LV: { signup: "REĢISTRĒTIES", login: "PIETEIKTIES" },
+        NL: { signup: "REGISTREREN", login: "INLOGGEN" },
+        NO: { signup: "REGISTRER DEG", login: "LOGG INN" },
+        PL: { signup: "ZAREJESTRUJ SIĘ", login: "ZALOGUJ SIĘ" },
+        PT: { signup: "REGISTRAR-SE", login: "ENTRAR" },
+        RO: { signup: "ÎNREGISTRARE", login: "CONECTARE" },
+        RS: { signup: "REGISTRACIJA", login: "PRIJAVA" },
+        SE: { signup: "REGISTRERA DIG", login: "LOGGA IN" },
+        SI: { signup: "REGISTRACIJA", login: "PRIJAVA" },
+        SK: { signup: "REGISTRÁCIA", login: "PRIHLÁSENIE" }
+      };
+
+      for (const lang in authTranslations) {
+        if (translations[lang]) {
+          translations[lang].signup = authTranslations[lang].signup;
+          translations[lang].login = authTranslations[lang].login;
+        }
+      }
+
+      // 5. Mappings Database (Capital Centers & Residential locations for 29 Countries)
+      const countryMapData = {
+        AT: { center: [48.2082, 16.3738], addresses: [
+          { coord: [48.2025, 16.3685], text: "Herrengasse 8, 1010 Wien, Austria" },
+          { coord: [48.2140, 16.3792], text: "Rotenturmstraße 12, 1010 Wien, Austria" },
+          { coord: [48.2062, 16.3860], text: "Riemergasse 5, 1010 Wien, Austria" }
+        ]},
+        BA: { center: [43.8563, 18.4131], addresses: [
+          { coord: [43.8580, 18.4230], text: "Ferhadija 12, Sarajevo 71000, Bosnia and Herzegovina" },
+          { coord: [43.8525, 18.4012], text: "Kranjčevićeva 6, Sarajevo 71000, Bosnia and Herzegovina" },
+          { coord: [43.8610, 18.4110], text: "Mula Mustafe Bašeskije 15, Sarajevo 71000, Bosnia and Herzegovina" }
+        ]},
+        BE: { center: [50.8503, 4.3517], addresses: [
+          { coord: [50.8442, 4.3592], text: "Rue de l'Étuve 31, 1000 Bruxelles, Belgium" },
+          { coord: [50.8520, 4.3460], text: "Rue de Flandre 14, 1000 Bruxelles, Belgium" },
+          { coord: [50.8415, 4.3645], text: "Rue de la Loi 16, 1000 Bruxelles, Belgium" }
+        ]},
+        BG: { center: [42.6977, 23.3219], addresses: [
+          { coord: [42.6952, 23.3325], text: "ul. \"Tsar Ivan Asen II\" 8, Sofia 1124, Bulgaria" },
+          { coord: [42.6890, 23.3180], text: "bul. \"Vitosha\" 22, Sofia 1000, Bulgaria" },
+          { coord: [42.7032, 23.3245], text: "ul. \"Knyaz Boris I\" 114, Sofia 1202, Bulgaria" }
+        ]},
+        CH: { center: [46.9480, 7.4474], addresses: [
+          { coord: [46.9472, 7.4520], text: "Kramgasse 49, 3011 Bern, Switzerland" },
+          { coord: [46.9515, 7.4390], text: "Laupenstrasse 8, 3008 Bern, Switzerland" },
+          { coord: [46.9440, 7.4425], text: "Monbijoustrasse 16, 3011 Bern, Switzerland" }
+        ]},
+        CR: { center: [45.8150, 15.9819], addresses: [
+          { coord: [45.8122, 15.9735], text: "Gajeva ul. 10, 10000 Zagreb, Croatia" },
+          { coord: [45.8155, 15.9902], text: "Vlaška ul. 20, 10000 Zagreb, Croatia" },
+          { coord: [45.8080, 15.9810], text: "Preradovićeva ul. 5, 10000 Zagreb, Croatia" }
+        ]},
+        CZ: { center: [50.0755, 14.4378], addresses: [
+          { coord: [50.0825, 14.4265], text: "Melantrichova 10, 110 00 Praha 1, Czechia" },
+          { coord: [50.0712, 14.4320], text: "Ječná 12, 120 00 Praha 2, Czechia" },
+          { coord: [50.0860, 14.4440], text: "Slezská 14, 120 00 Praha 2, Czechia" }
+        ]},
+        DE: { center: [52.5200, 13.4050], addresses: [
+          { coord: [52.5240, 13.4110], text: "Karl-Liebknecht-Str. 12, 10178 Berlin, Germany" },
+          { coord: [52.5125, 13.3880], text: "Friedrichstraße 80, 10117 Berlin, Germany" },
+          { coord: [52.5310, 13.3980], text: "Invalidenstraße 112, 10115 Berlin, Germany" }
+        ]},
+        DK: { center: [55.6761, 12.5683], addresses: [
+          { coord: [55.6815, 12.5720], text: "Gothersgade 14, 1123 København, Denmark" },
+          { coord: [55.6705, 12.5615], text: "Rysensteensgade 6, 1564 København, Denmark" },
+          { coord: [55.6780, 12.5850], text: "Nyhavn 16, 1051 København, Denmark" }
+        ]},
+        EE: { center: [59.4370, 24.7536], addresses: [
+          { coord: [59.4352, 24.7435], text: "Pikk 12, 10123 Tallinn, Estonia" },
+          { coord: [59.4310, 24.7570], text: "Tartu maantee 16, 10117 Tallinn, Estonia" },
+          { coord: [59.4420, 24.7480], text: "Uus 5, 10111 Tallinn, Estonia" }
+        ]},
+        ES: { center: [40.4168, -3.7038], addresses: [
+          { coord: [40.4125, -3.7082], text: "Calle Mayor 12, 28013 Madrid, Spain" },
+          { coord: [40.4210, -3.6935], text: "Calle de Hortaleza 24, 28004 Madrid, Spain" },
+          { coord: [40.4190, -3.7145], text: "Calle de Bailén 6, 28005 Madrid, Spain" }
+        ]},
+        FI: { center: [60.1699, 24.9384], addresses: [
+          { coord: [60.1645, 24.9450], text: "Uudenmaankatu 12, 00120 Helsinki, Finland" },
+          { coord: [60.1732, 24.9280], text: "Runeberginkatu 15, 00100 Helsinki, Finland" },
+          { coord: [60.1610, 24.9350], text: "Albertinkatu 24, 00120 Helsinki, Finland" }
+        ]},
+        FR: { center: [48.8566, 2.3522], addresses: [
+          { coord: [48.8530, 2.3610], text: "Rue Saint-Antoine 14, 75004 Paris, France" },
+          { coord: [48.8625, 2.3412], text: "Rue Coquillière 22, 75001 Paris, France" },
+          { coord: [48.8470, 2.3480], text: "Rue des Écoles 35, 75005 Paris, France" }
+        ]},
+        GR: { center: [37.9838, 23.7275], addresses: [
+          { coord: [37.9780, 23.7315], text: "Mitropoleos 12, Athina 105 63, Greece" },
+          { coord: [37.9885, 23.7190], text: "Agiou Konstantinou 15, Athina 104 31, Greece" },
+          { coord: [37.9690, 23.7290], text: "Rovertou Galli 6, Athina 117 42, Greece" }
+        ]},
+        HU: { center: [47.4979, 19.0402], addresses: [
+          { coord: [47.4925, 19.0512], text: "Váci u. 12, 1052 Budapest, Hungary" },
+          { coord: [47.5060, 19.0345], text: "Batthyány u. 14, 1015 Budapest, Hungary" },
+          { coord: [47.4880, 19.0610], text: "Kálvin tér 5, 1091 Budapest, Hungary" }
+        ]},
+        IE: { center: [53.3498, -6.2603], addresses: [
+          { coord: [53.3445, -6.2680], text: "Aungier St 22, Dublin 2, D02, Ireland" },
+          { coord: [53.3532, -6.2515], text: "Gardiner St Lower 14, Dublin 1, D01, Ireland" },
+          { coord: [53.3410, -6.2570], text: "Stephen's Green 8, Dublin 2, D02, Ireland" }
+        ]},
+        IT: { center: [41.9028, 12.4964], addresses: [
+          { coord: [41.8985, 12.4822], text: "Via del Corso 114, 00186 Roma, Italy" },
+          { coord: [41.9080, 12.5110], text: "Viale Castro Pretorio 22, 00185 Roma, Italy" },
+          { coord: [41.8905, 12.4920], text: "Via Cavour 140, 00184 Roma, Italy" }
+        ]},
+        LT: { center: [54.6872, 25.2797], addresses: [
+          { coord: [54.6822, 25.2915], text: "Didžioji g. 8, Vilnius 01128, Lithuania" },
+          { coord: [54.6935, 25.2710], text: "Pamėnkalnio g. 14, Vilnius 01116, Lithuania" },
+          { coord: [54.6780, 25.2810], text: "Pylimo g. 22, Vilnius 01135, Lithuania" }
+        ]},
+        LV: { center: [56.9496, 24.1052], addresses: [
+          { coord: [56.9452, 24.1130], text: "Kalku iela 10, Riga LV-1050, Latvia" },
+          { coord: [56.9530, 24.0950], text: "Krišjana Valdemara iela 15, Riga LV-1010, Latvia" },
+          { coord: [56.9410, 24.1210], text: "Gogoļa iela 6, Riga LV-1050, Latvia" }
+        ]},
+        NL: { center: [52.3676, 4.9041], addresses: [
+          { coord: [52.3725, 4.8890], text: "Rozengracht 24, 1016 NC Amsterdam, Netherlands" },
+          { coord: [52.3590, 4.8980], text: "Albert Cuypstraat 12, 1072 CT Amsterdam, Netherlands" },
+          { coord: [52.3650, 4.9120], text: "Plantage Middenlaan 8, 1018 DD Amsterdam, Netherlands" }
+        ]},
+        NO: { center: [59.9139, 10.7522], addresses: [
+          { coord: [59.9180, 10.7410], text: "Storgata 16, 0184 Oslo, Norway" },
+          { coord: [59.9075, 10.7580], text: "Schweigaards gate 12, 0185 Oslo, Norway" },
+          { coord: [59.9120, 10.7320], text: "Akersgata 24, 0158 Oslo, Norway" }
+        ]},
+        PL: { center: [52.2297, 21.0122], addresses: [
+          { coord: [52.2355, 21.0080], text: "ul. Świętokrzyska 14, 00-050 Warszawa, Poland" },
+          { coord: [52.2220, 21.0210], text: "ul. Hoża 22, 00-521 Warszawa, Poland" },
+          { coord: [52.2270, 20.9930], text: "ul. Żelazna 16, 00-806 Warszawa, Poland" }
+        ]},
+        PT: { center: [38.7223, -9.1393], addresses: [
+          { coord: [38.7115, -9.1435], text: "Rua Garret 12, 1200-203 Lisboa, Portugal" },
+          { coord: [38.7310, -9.1320], text: "Av. Almirante Reis 24, 1150-008 Lisboa, Portugal" },
+          { coord: [38.7260, -9.1550], text: "Rua Castilho 16, 1250-066 Lisboa, Portugal" }
+        ]},
+        RO: { center: [44.4323, 26.1063], addresses: [
+          { coord: [44.4285, 26.0980], text: "Strada Lipscani 22, București 030037, Romania" },
+          { coord: [44.4410, 26.1150], text: "Calea Moșilor 14, București 020853, Romania" },
+          { coord: [44.4350, 26.0890], text: "Strada Brezoianu 6, București 010131, Romania" }
+        ]},
+        RS: { center: [44.7872, 20.4573], addresses: [
+          { coord: [44.7895, 20.4635], text: "Knez Mihailova 12, Beograd 11000, Serbia" },
+          { coord: [44.7812, 20.4480], text: "Nemanjina 6, Beograd 11000, Serbia" },
+          { coord: [44.8010, 20.4610], text: "Kralja Milana 15, Beograd 11000, Serbia" }
+        ]},
+        SE: { center: [59.3293, 18.0686], addresses: [
+          { coord: [59.3325, 18.0610], text: "Drottninggatan 16, 111 51 Stockholm, Sweden" },
+          { coord: [59.3245, 18.0790], text: "Österlånggatan 12, 111 31 Stockholm, Sweden" },
+          { coord: [59.3410, 18.0550], text: "Sveavägen 24, 113 59 Stockholm, Sweden" }
+        ]},
+        SI: { center: [46.0569, 14.5058], addresses: [
+          { coord: [46.0512, 14.5085], text: "Mestni trg 8, 1000 Ljubljana, Slovenia" },
+          { coord: [46.0595, 14.4980], text: "Slovenska cesta 14, 1000 Ljubljana, Slovenia" },
+          { coord: [46.0480, 14.5120], text: "Karlovška cesta 5, 1000 Ljubljana, Slovenia" }
+        ]},
+        SK: { center: [48.1486, 17.1077], addresses: [
+          { coord: [48.1442, 17.1060], text: "Michalská 12, 811 01 Bratislava, Slovakia" },
+          { coord: [48.1525, 17.1190], text: "Špitálska 14, 811 08 Bratislava, Slovakia" },
+          { coord: [48.1390, 17.0980], text: "Zámocká 6, 811 01 Bratislava, Slovakia" }
+        ]},
+        UK: { center: [52.4862, -1.8904], addresses: [
+          { coord: [52.4785, -1.8992], text: "16 Stephenson Pl, Birmingham B2 4PY, United Kingdom" },
+          { coord: [52.4895, -1.9025], text: "87 Constitution Hill, Birmingham B19 3JY, United Kingdom" },
+          { coord: [52.4830, -1.8740], text: "35 Great Barr St, Birmingham B9 4AT, United Kingdom" }
+        ]}
+      };
+
+      const countryNames = {
+        AT: "Austria", BA: "Bosnia and Herzegovina", BE: "Belgium", BG: "Bulgaria",
+        CH: "Switzerland", CR: "Croatia", CZ: "Czech Republic", DE: "Germany",
+        DK: "Denmark", EE: "Estonia", ES: "Spain", FI: "Finland", FR: "France",
+        GR: "Greece", HU: "Hungary", IE: "Ireland", IT: "Italy", LT: "Lithuania",
+        LV: "Latvia", NL: "Netherlands", NO: "Norway", PL: "Poland", PT: "Portugal",
+        RO: "Romania", RS: "Serbia", SE: "Sweden", SI: "Slovenia", SK: "Slovakia",
+        UK: "United Kingdom"
+      };
+
+      const cityDatabase = {
+        AT: [
+          { name: "Wien", coord: [48.2082, 16.3738], weight: 5 },
+          { name: "Graz", coord: [47.0707, 15.4395], weight: 3 },
+          { name: "Linz", coord: [48.3069, 14.2858], weight: 2 },
+          { name: "Salzburg", coord: [47.8095, 13.0550], weight: 2 },
+          { name: "Innsbruck", coord: [47.2692, 11.4041], weight: 1 },
+          { name: "Klagenfurt", coord: [46.6249, 14.3050], weight: 1 },
+          { name: "Villach", coord: [46.6111, 13.8558], weight: 1 }
+        ],
+        BA: [
+          { name: "Sarajevo", coord: [43.8563, 18.4131], weight: 4 },
+          { name: "Banja Luka", coord: [44.7722, 17.1910], weight: 2 },
+          { name: "Tuzla", coord: [44.5375, 18.6735], weight: 2 },
+          { name: "Mostar", coord: [43.3438, 17.8078], weight: 1 },
+          { name: "Zenica", coord: [44.2016, 17.9039], weight: 1 },
+          { name: "Bihać", coord: [44.8119, 15.8686], weight: 1 }
+        ],
+        BE: [
+          { name: "Bruxelles", coord: [50.8503, 4.3517], weight: 5 },
+          { name: "Antwerpen", coord: [51.2194, 4.4025], weight: 4 },
+          { name: "Gent", coord: [51.0543, 3.7174], weight: 3 },
+          { name: "Liège", coord: [50.6326, 5.5797], weight: 2 },
+          { name: "Brugge", coord: [51.2093, 3.2247], weight: 2 },
+          { name: "Namur", coord: [50.4674, 4.8720], weight: 1 },
+          { name: "Leuven", coord: [50.8798, 4.7005], weight: 1 },
+          { name: "Mons", coord: [50.4542, 3.9567], weight: 1 }
+        ],
+        BG: [
+          { name: "Sofia", coord: [42.6977, 23.3219], weight: 5 },
+          { name: "Plovdiv", coord: [42.1354, 24.7453], weight: 3 },
+          { name: "Varna", coord: [43.2141, 27.9147], weight: 3 },
+          { name: "Burgas", coord: [42.5048, 27.4626], weight: 2 },
+          { name: "Ruse", coord: [43.8356, 25.9657], weight: 1 },
+          { name: "Stara Zagora", coord: [42.4258, 25.6345], weight: 1 },
+          { name: "Pleven", coord: [43.4170, 24.6067], weight: 1 }
+        ],
+        CH: [
+          { name: "Zürich", coord: [47.3769, 8.5417], weight: 5 },
+          { name: "Genève", coord: [46.2044, 6.1432], weight: 4 },
+          { name: "Basel", coord: [47.5596, 7.5886], weight: 3 },
+          { name: "Bern", coord: [46.9480, 7.4474], weight: 3 },
+          { name: "Lausanne", coord: [46.5197, 6.6323], weight: 2 },
+          { name: "Winterthur", coord: [47.5008, 8.7259], weight: 1 },
+          { name: "Lucerne", coord: [47.0502, 8.3093], weight: 1 },
+          { name: "Lugano", coord: [46.0037, 8.9511], weight: 1 }
+        ],
+        CR: [
+          { name: "Zagreb", coord: [45.8150, 15.9819], weight: 5 },
+          { name: "Split", coord: [43.5081, 16.4402], weight: 3 },
+          { name: "Rijeka", coord: [45.3271, 14.4422], weight: 2 },
+          { name: "Osijek", coord: [45.5550, 18.6955], weight: 2 },
+          { name: "Zadar", coord: [44.1194, 15.2314], weight: 1 },
+          { name: "Pula", coord: [44.8666, 13.8496], weight: 1 },
+          { name: "Slavonski Brod", coord: [45.1602, 18.0156], weight: 1 }
+        ],
+        CZ: [
+          { name: "Praha", coord: [50.0755, 14.4378], weight: 5 },
+          { name: "Brno", coord: [49.1951, 16.6068], weight: 4 },
+          { name: "Ostrava", coord: [49.8209, 18.2625], weight: 3 },
+          { name: "Plzeň", coord: [49.7384, 13.3736], weight: 2 },
+          { name: "Liberec", coord: [50.7671, 15.0562], weight: 1 },
+          { name: "Olomouc", coord: [49.5938, 17.2509], weight: 1 },
+          { name: "České Budějovice", coord: [48.9745, 14.4743], weight: 1 }
+        ],
+        DE: [
+          { name: "Berlin", coord: [52.5200, 13.4050], weight: 5 },
+          { name: "Hamburg", coord: [53.5511, 9.9937], weight: 5 },
+          { name: "München", coord: [48.1351, 11.5820], weight: 5 },
+          { name: "Köln", coord: [50.9375, 6.9603], weight: 4 },
+          { name: "Frankfurt am Main", coord: [50.1109, 8.6821], weight: 4 },
+          { name: "Stuttgart", coord: [48.7758, 9.1829], weight: 3 },
+          { name: "Düsseldorf", coord: [51.2271, 6.7735], weight: 3 },
+          { name: "Leipzig", coord: [51.3397, 12.3731], weight: 3 },
+          { name: "Dortmund", coord: [51.5136, 7.4653], weight: 2 },
+          { name: "Essen", coord: [51.4556, 7.0116], weight: 2 },
+          { name: "Bremen", coord: [53.0793, 8.8017], weight: 2 },
+          { name: "Dresden", coord: [51.0504, 13.7373], weight: 2 },
+          { name: "Hannover", coord: [52.3759, 9.7320], weight: 2 },
+          { name: "Nürnberg", coord: [49.4521, 11.0767], weight: 2 }
+        ],
+        DK: [
+          { name: "København", coord: [55.6761, 12.5683], weight: 5 },
+          { name: "Aarhus", coord: [56.1629, 10.2039], weight: 3 },
+          { name: "Odense", coord: [55.4038, 10.4024], weight: 2 },
+          { name: "Aalborg", coord: [57.0488, 9.9217], weight: 2 },
+          { name: "Esbjerg", coord: [55.4765, 8.4594], weight: 1 },
+          { name: "Randers", coord: [56.4607, 10.0364], weight: 1 }
+        ],
+        EE: [
+          { name: "Tallinn", coord: [59.4370, 24.7536], weight: 4 },
+          { name: "Tartu", coord: [58.3780, 26.7290], weight: 2 },
+          { name: "Narva", coord: [59.3797, 28.1791], weight: 1 },
+          { name: "Pärnu", coord: [58.3859, 24.4971], weight: 1 },
+          { name: "Kohtla-Järve", coord: [59.3989, 27.2731], weight: 1 }
+        ],
+        ES: [
+          { name: "Madrid", coord: [40.4168, -3.7038], weight: 5 },
+          { name: "Barcelona", coord: [41.3851, 2.1734], weight: 5 },
+          { name: "Valencia", coord: [39.4699, -0.3763], weight: 4 },
+          { name: "Sevilla", coord: [37.3891, -5.9845], weight: 3 },
+          { name: "Zaragoza", coord: [41.6488, -0.8891], weight: 3 },
+          { name: "Málaga", coord: [36.7213, -4.4214], weight: 3 },
+          { name: "Bilbao", coord: [43.2630, -2.9350], weight: 2 },
+          { name: "Alicante", coord: [38.3460, -0.4907], weight: 2 },
+          { name: "Murcia", coord: [37.9922, -1.1307], weight: 2 },
+          { name: "Las Palmas", coord: [28.1235, -15.4363], weight: 1 },
+          { name: "Palma de Mallorca", coord: [39.5696, 2.6502], weight: 2 }
+        ],
+        FI: [
+          { name: "Helsinki", coord: [60.1699, 24.9384], weight: 5 },
+          { name: "Espoo", coord: [60.2055, 24.6559], weight: 3 },
+          { name: "Tampere", coord: [61.4978, 23.7610], weight: 2 },
+          { name: "Vantaa", coord: [60.2934, 25.0416], weight: 2 },
+          { name: "Oulu", coord: [65.0124, 25.4682], weight: 2 },
+          { name: "Turku", coord: [60.4518, 22.2666], weight: 1 },
+          { name: "Jyväskylä", coord: [62.2426, 25.7473], weight: 1 },
+          { name: "Lahti", coord: [60.9827, 25.6615], weight: 1 }
+        ],
+        FR: [
+          { name: "Paris", coord: [48.8566, 2.3522], weight: 5 },
+          { name: "Marseille", coord: [43.2965, 5.3698], weight: 4 },
+          { name: "Lyon", coord: [45.7640, 4.8357], weight: 4 },
+          { name: "Toulouse", coord: [43.6047, 1.4442], weight: 3 },
+          { name: "Nice", coord: [43.7102, 7.2620], weight: 3 },
+          { name: "Nantes", coord: [47.2184, -1.5536], weight: 3 },
+          { name: "Strasbourg", coord: [48.5734, 7.7521], weight: 2 },
+          { name: "Lille", coord: [50.6292, 3.0573], weight: 2 },
+          { name: "Bordeaux", coord: [44.8378, -0.5792], weight: 2 },
+          { name: "Montpellier", coord: [43.6108, 3.8767], weight: 2 },
+          { name: "Rennes", coord: [48.1173, -1.6778], weight: 2 },
+          { name: "Reims", coord: [49.2583, 4.0317], weight: 1 }
+        ],
+        GR: [
+          { name: "Athina", coord: [37.9838, 23.7275], weight: 5 },
+          { name: "Thessaloniki", coord: [40.6401, 22.9444], weight: 4 },
+          { name: "Patras", coord: [38.2466, 21.7346], weight: 2 },
+          { name: "Heraklion", coord: [35.3387, 25.1442], weight: 2 },
+          { name: "Larissa", coord: [39.6390, 22.4191], weight: 1 },
+          { name: "Volos", coord: [39.3621, 22.9439], weight: 1 },
+          { name: "Ioannina", coord: [39.6650, 20.8537], weight: 1 }
+        ],
+        HU: [
+          { name: "Budapest", coord: [47.4979, 19.0402], weight: 5 },
+          { name: "Debrecen", coord: [47.5316, 21.6273], weight: 2 },
+          { name: "Szeged", coord: [46.2530, 20.1414], weight: 2 },
+          { name: "Miskolc", coord: [48.1035, 20.7896], weight: 1 },
+          { name: "Pécs", coord: [46.0727, 18.2323], weight: 1 },
+          { name: "Győr", coord: [47.6875, 17.6504], weight: 1 }
+        ],
+        IE: [
+          { name: "Dublin", coord: [53.3498, -6.2603], weight: 5 },
+          { name: "Cork", coord: [51.8985, -8.4756], weight: 3 },
+          { name: "Limerick", coord: [52.6638, -8.6268], weight: 2 },
+          { name: "Galway", coord: [53.2707, -9.0568], weight: 2 },
+          { name: "Waterford", coord: [52.2593, -7.1101], weight: 1 },
+          { name: "Drogheda", coord: [53.7180, -6.3478], weight: 1 }
+        ],
+        IT: [
+          { name: "Roma", coord: [41.9028, 12.4964], weight: 5 },
+          { name: "Milano", coord: [45.4642, 9.1900], weight: 5 },
+          { name: "Napoli", coord: [40.8518, 14.2681], weight: 4 },
+          { name: "Torino", coord: [45.0703, 7.6869], weight: 4 },
+          { name: "Palermo", coord: [38.1157, 13.3615], weight: 3 },
+          { name: "Genova", coord: [44.4056, 8.9463], weight: 3 },
+          { name: "Bologna", coord: [44.4949, 11.3426], weight: 3 },
+          { name: "Firenze", coord: [43.7696, 11.2558], weight: 3 },
+          { name: "Bari", coord: [41.1171, 16.8719], weight: 2 },
+          { name: "Catania", coord: [37.5079, 15.0830], weight: 2 },
+          { name: "Venezia", coord: [45.4408, 12.3155], weight: 2 },
+          { name: "Verona", coord: [45.4384, 10.9916], weight: 2 }
+        ],
+        LT: [
+          { name: "Vilnius", coord: [54.6872, 25.2797], weight: 4 },
+          { name: "Kaunas", coord: [54.8985, 23.9036], weight: 3 },
+          { name: "Klaipėda", coord: [55.7033, 21.1443], weight: 2 },
+          { name: "Šiauliai", coord: [55.9341, 23.3137], weight: 1 },
+          { name: "Panevėžys", coord: [55.7314, 24.3653], weight: 1 }
+        ],
+        LV: [
+          { name: "Riga", coord: [56.9496, 24.1052], weight: 4 },
+          { name: "Daugavpils", coord: [55.8747, 26.5361], weight: 2 },
+          { name: "Liepāja", coord: [56.5097, 21.0108], weight: 1 },
+          { name: "Jelgava", coord: [56.6500, 23.7167], weight: 1 },
+          { name: "Jūrmala", coord: [56.9680, 23.7704], weight: 1 }
+        ],
+        NL: [
+          { name: "Amsterdam", coord: [52.3676, 4.9041], weight: 5 },
+          { name: "Rotterdam", coord: [51.9244, 4.4777], weight: 4 },
+          { name: "Den Haag", coord: [52.0705, 4.3007], weight: 4 },
+          { name: "Utrecht", coord: [52.0907, 5.1214], weight: 3 },
+          { name: "Eindhoven", coord: [51.4416, 5.4697], weight: 3 },
+          { name: "Tilburg", coord: [51.5606, 5.0919], weight: 2 },
+          { name: "Groningen", coord: [53.2194, 6.5665], weight: 2 },
+          { name: "Almere", coord: [52.3702, 5.2180], weight: 1 },
+          { name: "Breda", coord: [51.5719, 4.7683], weight: 1 }
+        ],
+        NO: [
+          { name: "Oslo", coord: [59.9139, 10.7522], weight: 5 },
+          { name: "Bergen", coord: [60.3913, 5.3221], weight: 3 },
+          { name: "Trondheim", coord: [63.4305, 10.3951], weight: 2 },
+          { name: "Stavanger", coord: [58.9700, 5.7331], weight: 2 },
+          { name: "Kristiansand", coord: [58.1467, 7.9949], weight: 1 },
+          { name: "Sandnes", coord: [58.8524, 5.7352], weight: 1 },
+          { name: "Tromsø", coord: [69.6492, 18.9560], weight: 1 }
+        ],
+        PL: [
+          { name: "Warszawa", coord: [52.2297, 21.0122], weight: 5 },
+          { name: "Kraków", coord: [50.0647, 19.9450], weight: 4 },
+          { name: "Łódź", coord: [51.7592, 19.4560], weight: 3 },
+          { name: "Wrocław", coord: [51.1079, 17.0385], weight: 3 },
+          { name: "Poznań", coord: [52.4064, 16.9252], weight: 3 },
+          { name: "Gdańsk", coord: [54.3520, 18.6466], weight: 3 },
+          { name: "Szczecin", coord: [53.4285, 14.5528], weight: 2 },
+          { name: "Bydgoszcz", coord: [53.1235, 18.0084], weight: 2 },
+          { name: "Lublin", coord: [51.2465, 22.5684], weight: 2 },
+          { name: "Katowice", coord: [50.2649, 19.0238], weight: 2 }
+        ],
+        PT: [
+          { name: "Lisboa", coord: [38.7223, -9.1393], weight: 5 },
+          { name: "Porto", coord: [41.1579, -8.6291], weight: 4 },
+          { name: "Braga", coord: [41.5454, -8.4265], weight: 2 },
+          { name: "Coimbra", coord: [40.2033, -8.4103], weight: 2 },
+          { name: "Funchal", coord: [32.6669, -16.9241], weight: 1 },
+          { name: "Setúbal", coord: [38.5260, -8.8911], weight: 1 },
+          { name: "Aveiro", coord: [40.6405, -8.6538], weight: 1 }
+        ],
+        RO: [
+          { name: "București", coord: [44.4323, 26.1063], weight: 5 },
+          { name: "Cluj-Napoca", coord: [46.7712, 23.6236], weight: 3 },
+          { name: "Timișoara", coord: [45.7537, 21.2257], weight: 3 },
+          { name: "Iași", coord: [47.1585, 27.6014], weight: 3 },
+          { name: "Constanța", coord: [44.1792, 28.6498], weight: 2 },
+          { name: "Craiova", coord: [44.3302, 23.7949], weight: 1 },
+          { name: "Brașov", coord: [45.6580, 25.6012], weight: 1 },
+          { name: "Galați", coord: [45.4353, 28.0299], weight: 1 },
+          { name: "Ploiești", coord: [44.9367, 26.0129], weight: 1 }
+        ],
+        RS: [
+          { name: "Beograd", coord: [44.7872, 20.4573], weight: 5 },
+          { name: "Novi Sad", coord: [45.2671, 19.8335], weight: 3 },
+          { name: "Niš", coord: [43.3209, 21.8954], weight: 2 },
+          { name: "Kragujevac", coord: [44.0128, 20.9114], weight: 1 },
+          { name: "Subotica", coord: [46.1005, 19.6651], weight: 1 },
+          { name: "Pančevo", coord: [44.8708, 20.6403], weight: 1 }
+        ],
+        SE: [
+          { name: "Stockholm", coord: [59.3293, 18.0686], weight: 5 },
+          { name: "Göteborg", coord: [57.7089, 11.9746], weight: 4 },
+          { name: "Malmö", coord: [55.6050, 13.0038], weight: 3 },
+          { name: "Uppsala", coord: [59.8586, 17.6389], weight: 2 },
+          { name: "Västerås", coord: [59.6099, 16.5448], weight: 1 },
+          { name: "Örebro", coord: [59.2753, 15.2134], weight: 1 },
+          { name: "Linköping", coord: [58.4108, 15.6216], weight: 1 }
+        ],
+        SI: [
+          { name: "Ljubljana", coord: [46.0569, 14.5058], weight: 4 },
+          { name: "Maribor", coord: [46.5547, 15.6459], weight: 2 },
+          { name: "Celje", coord: [46.2397, 15.2677], weight: 1 },
+          { name: "Kranj", coord: [46.2389, 14.3556], weight: 1 },
+          { name: "Koper", coord: [45.5469, 13.7294], weight: 1 }
+        ],
+        SK: [
+          { name: "Bratislava", coord: [48.1486, 17.1077], weight: 4 },
+          { name: "Košice", coord: [48.7164, 21.2611], weight: 3 },
+          { name: "Prešov", coord: [48.9985, 21.2339], weight: 1 },
+          { name: "Žilina", coord: [49.2231, 18.7398], weight: 1 },
+          { name: "Nitra", coord: [48.3061, 18.0874], weight: 1 }
+        ],
+        UK: [
+          { name: "London", coord: [51.5074, -0.1278], weight: 5 },
+          { name: "Birmingham", coord: [52.4862, -1.8904], weight: 4 },
+          { name: "Manchester", coord: [53.4808, -2.2426], weight: 4 },
+          { name: "Glasgow", coord: [55.8642, -4.2518], weight: 3 },
+          { name: "Leeds", coord: [53.8008, -1.5491], weight: 3 },
+          { name: "Liverpool", coord: [53.4084, -2.9916], weight: 3 },
+          { name: "Newcastle", coord: [54.9783, -1.6178], weight: 2 },
+          { name: "Edinburgh", coord: [55.9533, -3.1883], weight: 2 },
+          { name: "Belfast", coord: [54.5973, -5.9301], weight: 2 },
+          { name: "Bristol", coord: [51.4545, -2.5879], weight: 2 },
+          { name: "Sheffield", coord: [53.3811, -1.4701], weight: 2 },
+          { name: "Leicester", coord: [52.6369, -1.1398], weight: 2 },
+          { name: "Coventry", coord: [52.4068, -1.5122], weight: 1 },
+          { name: "Nottingham", coord: [52.9548, -1.1581], weight: 2 }
+        ]
+      };
+
+      // 6. Интерактивная карта (Leaflet Map Engine)
+      let map = null;
+      let userMarker = null;
+      let depotMarkers = [];
+      let selectedDepotCode = null;
+
+      // Вспомогательная функция генерации детерминированных NUTS-кодов для городов
+      function generateNutsCode(countryCode, cityName) {
+        let hash = 0;
+        for (let i = 0; i < cityName.length; i++) {
+          hash = cityName.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const nuts1 = String.fromCharCode(65 + (Math.abs(hash) % 26)); // A-Z
+        const nuts2 = 1 + (Math.abs(hash >> 5) % 9);
+        const nuts3 = 1 + (Math.abs(hash >> 10) % 9);
+        return `${countryCode} ${nuts1} ${nuts2} ${nuts3}`;
+      }
+
+      // Генерация кода склада для дэшборда (синхронизированно с dashboard.html)
+      function getDashboardDepotCode(countryCode, cityName, cityWeight, index) {
+        let hash = 0;
+        for (let i = 0; i < cityName.length; i++) {
+          hash = cityName.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const region = 100 + (Math.abs(hash) % 899);
+        const numDashboardDepots = Math.max(1, Math.min(3, Math.floor(cityWeight / 1.5)));
+        const dashboardIndex = index % numDashboardDepots;
+        return `${countryCode}${region}-0${dashboardIndex + 1}`;
+      }
+
+      // Получение вместимости и загрузки склада (детерминированно по хэшу)
+      function getDepotStats(code) {
+        const hash = code.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+        const totalCapacity = 100 + (hash % 15) * 10;
+        const fillRate = 35 + (hash % 12) * 5;
+        return { totalCapacity, fillRate };
+      }
+
+      // Генерируем массив всех складов один раз при загрузке страницы
+      const allDepotsData = [];
+      for (const [countryCode, cities] of Object.entries(cityDatabase)) {
+        const countryName = countryNames[countryCode] || countryCode;
+        cities.forEach((city) => {
+          // Увеличиваем количество складов в 10 раз от веса города для густой сети (5-15 мин пешком)
+          const numDepots = city.weight * 10;
+          for (let j = 0; j < numDepots; j++) {
+            // Естественное распределение в черте города в радиусе до ~2 км от центра
+            const angle = Math.random() * 2 * Math.PI;
+            const r = 0.002 + Math.random() * 0.016; // от ~200 до 1800 метров от центра
+            const latOffset = Math.sin(angle) * r;
+            const lngOffset = Math.cos(angle) * r;
+            
+            const coord = [city.coord[0] + latOffset, city.coord[1] + lngOffset];
+            const nutsBase = generateNutsCode(countryCode, city.name);
+            const depotCode = `${nutsBase} #${j + 1}`;
+            const addressText = `Array Depot ${city.name} #${j + 1}, ${countryName} (NUTS-3: ${nutsBase}, Coordinates: ${coord[0].toFixed(4)}, ${coord[1].toFixed(4)})`;
+            
+            allDepotsData.push({
+              code: depotCode,
+              coord: coord,
+              address: addressText,
+              city: city.name,
+              country: countryCode,
+              index: j,
+              cityWeight: city.weight
+            });
+          }
+        });
+      }
+
+      // Кастомный указатель местоположения в виде пина (капли) со встроенной иконкой пользователя
+      const userAvatarSVG = `
+        <svg class="user-marker-svg" width="30" height="42" viewBox="0 0 30 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 0C6.71 0 0 6.71 0 15C0 26.25 15 42 15 42C15 42 30 26.25 30 15C30 6.71 23.29 0 15 0Z" fill="var(--text-color)"/>
+          <circle cx="15" cy="15" r="10" fill="white"/>
+          <circle cx="15" cy="14.5" r="4.42269" fill="black"/>
+          <path d="M14.9997 19.7006C17.1886 19.7006 19.209 20.424 20.8346 21.644C19.2771 23.0129 17.2362 23.8452 14.9997 23.8452C12.7633 23.8451 10.7231 23.0127 9.1657 21.644C10.7912 20.4241 12.8109 19.7007 14.9997 19.7006Z" fill="black"/>
+        </svg>
+      `;
+
+      const userIcon = L.divIcon({
+        className: 'custom-user-marker',
+        html: userAvatarSVG,
+        iconSize: [30, 42],
+        iconAnchor: [15, 42]
+      });
+
+      // Функция скрытия склада, если он совпадает с положением пользователя
+      function filterDepotsNearUser(userCoord) {
+        const uLat = Array.isArray(userCoord) ? userCoord[0] : userCoord.lat;
+        const uLng = Array.isArray(userCoord) ? userCoord[1] : userCoord.lng;
+
+        depotMarkers.forEach(marker => {
+          if (marker.options.icon.options.className === 'custom-depot-marker') {
+            const latLng = marker.getLatLng();
+            if (Math.abs(latLng.lat - uLat) < 0.0015 && Math.abs(latLng.lng - uLng) < 0.0015) {
+              map.removeLayer(marker);
+            }
+          }
+        });
+      }
+
+      // Функция вывода карточки склада в левую панель
+      function showDepotDetails(depotCode, addressText, depotCoord, marker) {
+        const depotPanel = document.getElementById('depot-info-panel');
+        if (!depotPanel) return;
+
+        // Сохраняем код выбранного склада
+        selectedDepotCode = depotCode;
+
+        // Убираем класс selected-depot со всех маркеров на странице
+        document.querySelectorAll('.custom-depot-marker').forEach(el => {
+          el.classList.remove('selected-depot');
+        });
+
+        // Добавляем класс selected-depot к HTML-элементу кликнутого маркера для мгновенной подсветки
+        if (marker) {
+          const markerEl = marker.getElement();
+          if (markerEl) {
+            markerEl.classList.add('selected-depot');
+          }
+        }
+
+        // 3. Добавляем класс has-selected-depot на контейнер карты (для смещения элементов управления и изменения цвета остальных точек)
+        const mapContainer = document.getElementById('map-element');
+        if (mapContainer) {
+          mapContainer.classList.add('has-selected-depot');
+        }
+
+        // 4. Добавляем класс depot-selected на внешний контейнер, чтобы увеличить высоту
+        const triggerArea = document.getElementById('map-trigger-area');
+        if (triggerArea) {
+          triggerArea.classList.add('depot-selected');
+        }
+
+        // Находим объект склада из allDepotsData по коду
+        const depotObj = allDepotsData.find(d => d.code === depotCode);
+        const city = depotObj ? depotObj.city : "Berlin";
+        const country = depotObj ? depotObj.country : "DE";
+        const countryName = countryNames[country] || country;
+        const index = depotObj ? depotObj.index : 0;
+        const cityWeight = depotObj ? depotObj.cityWeight : 3;
+
+        // Вычисляем соответствующий код склада в дэшборде
+        const dashboardCode = getDashboardDepotCode(country, city, cityWeight, index);
+        const { totalCapacity, fillRate } = getDepotStats(dashboardCode);
+
+        depotPanel.innerHTML = `
+          <button class="depot-panel-close-btn" id="depot-panel-close-btn" aria-label="Close details">✕</button>
+          <div class="depot-panel-content">
+            <span class="depot-panel-label" style="margin-bottom: 2px;">NUTS CODE</span>
+            <h4 class="depot-panel-title" style="font-size: 28px; line-height: 0.95; letter-spacing: -0.03em; font-weight: 800; margin-bottom: 2px;">${depotCode.split(' #')[0]}</h4>
+            <span class="depot-panel-label" style="font-weight: 800; font-size: 13px; color: var(--text-color); margin-bottom: 12px;">${city.toUpperCase()}, ${countryName.toUpperCase()}</span>
+            
+            <div class="depot-panel-divider" style="margin-bottom: 16px;"></div>
+            
+            <div class="depot-stats-grid" style="margin-bottom: auto; width: 100%;">
+              <div class="depot-card full-width">
+                <div class="depot-card-title">FACILITY CODE</div>
+                <div class="depot-card-divider"></div>
+                <div class="depot-card-subtitle">SYSTEM REGISTERED ID</div>
+                <div class="depot-card-value-box">
+                  <div class="depot-card-value">${dashboardCode}</div>
+                  <div class="depot-card-desc">DEPOT REFERENCE CODE</div>
+                </div>
+              </div>
+              <div class="depot-card full-width">
+                <div class="depot-card-title">LATITUDE / LONGITUDE</div>
+                <div class="depot-card-divider"></div>
+                <div class="depot-card-subtitle">GEOGRAPHIC COORDINATES</div>
+                <div class="depot-card-value-box">
+                  <div class="depot-card-value">${depotCoord[0].toFixed(4)}, ${depotCoord[1].toFixed(4)}</div>
+                  <div class="depot-card-desc">LAT / LNG POSITION</div>
+                </div>
+              </div>
+              <div class="depot-card">
+                <div class="depot-card-title">TOTAL CAPACITY</div>
+                <div class="depot-card-divider"></div>
+                <div class="depot-card-subtitle">MAX UNITS VOLUME</div>
+                <div class="depot-card-value-box">
+                  <div class="depot-card-value">${totalCapacity}</div>
+                  <div class="depot-card-desc">UNITS CAPACITY</div>
+                </div>
+              </div>
+              <div class="depot-card">
+                <div class="depot-card-title">FILL RATE</div>
+                <div class="depot-card-divider"></div>
+                <div class="depot-card-subtitle">WAREHOUSE LOAD</div>
+                <div class="depot-card-value-box">
+                  <div class="depot-card-value">${fillRate}%</div>
+                  <div class="depot-card-desc">ACTIVE LOAD</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="depot-safety-system" style="width: 100%;">
+              <span class="safety-title">FACILITY SAFETY SYSTEM</span>
+              <div class="safety-status-row">
+                <div class="safety-icons">
+                  <div class="tooltip-wrapper" data-tooltip="CE Certification">
+                    <img class="safety-icon" src="vector/icons/CE.svg" alt="CE">
+                  </div>
+                  <div class="tooltip-wrapper" data-tooltip="TÜV Rheinland Certified">
+                    <img class="safety-icon" src="vector/icons/TUV.svg" alt="TUV">
+                  </div>
+                  <div class="tooltip-wrapper" data-tooltip="Geprüfte Sicherheit Safety Certified">
+                    <img class="safety-icon" src="vector/icons/GS.svg" alt="GS">
+                  </div>
+                </div>
+                <span class="safety-status">STATUS: VERIFIED</span>
+              </div>
+            </div>
+
+            <a class="go-to-dashboard-btn" href="dashboard.html?depot=${dashboardCode}">GO TO DEPOT</a>
+          </div>
+        `;
+        depotPanel.classList.add('visible');
+
+        // Обработчик закрытия панели
+        const closeBtn = document.getElementById('depot-panel-close-btn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeDepotDetails();
+          });
+        }
+
+        // 5. Мгновенно запускаем полет карты к смещенному географическому центру (сдвигаем на 25% ширины влево для зума 16)
+        if (map && depotCoord) {
+          const worldPoint = map.project(depotCoord, 16);
+          const targetWorldPoint = L.point(worldPoint.x - map.getSize().x * 0.25, worldPoint.y);
+          const targetLatLng = map.unproject(targetWorldPoint, 16);
+
+          map.flyTo(targetLatLng, 16, { duration: 0.5 });
+        }
+      }
+
+      // Функция закрытия панели деталей и сброса выделения на карте
+      function closeDepotDetails() {
+        const depotPanel = document.getElementById('depot-info-panel');
+        const mapContainer = document.getElementById('map-element');
+        const triggerArea = document.getElementById('map-trigger-area');
+        
+        // Сбрасываем выбранный склад
+        selectedDepotCode = null;
+
+        // 1. Сразу закрываем панель и сбрасываем состояние
+        if (depotPanel) {
+          depotPanel.classList.remove('visible');
+        }
+        if (mapContainer) {
+          mapContainer.classList.remove('has-selected-depot');
+        }
+        if (triggerArea) {
+          triggerArea.classList.remove('depot-selected');
+        }
+
+        // 2. Одновременно запускаем полет обратно к координатам пользователя со стандартным зумом 14
+        if (map && userMarker) {
+          map.flyTo(userMarker.getLatLng(), 14, { duration: 0.5 });
+        }
+
+        // 3. После окончания анимации полета и закрытия панели (500мс) обновляем размеры Leaflet и перерисовываем маркеры
+        setTimeout(() => {
+          if (map) {
+            map.invalidateSize({ animate: false });
+            updateClusters();
+          }
+        }, 500);
+      }
+
+      // Функция определения размера ячейки сетки в зависимости от зума карты
+      function getGridSize(zoom) {
+        if (zoom >= 13) return 0; // На уровне улиц показываем индивидуальные склады
+        return 0.03 * Math.pow(2, 12 - zoom);
+      }
+
+      // Перерисовка складов с использованием кластеризации
+      function updateClusters() {
+        if (!map) return;
+
+        // Удаляем старые маркеры с карты
+        depotMarkers.forEach(m => map.removeLayer(m));
+        depotMarkers = [];
+
+        const zoom = map.getZoom();
+        const gridSize = getGridSize(zoom);
+        const bounds = map.getBounds().pad(0.3);
+
+        // Иконка склада AD
+        const depotBadgeHtml = `<div class="depot-marker-badge">AD</div>`;
+        function getDepotIcon(depotCode) {
+          const isSelected = selectedDepotCode === depotCode;
+          return L.divIcon({
+            className: `custom-depot-marker${isSelected ? ' selected-depot' : ''}`,
+            html: depotBadgeHtml,
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+          });
+        }
+
+        if (gridSize === 0) {
+          // Рендерим индивидуальные маркеры
+          allDepotsData.forEach((depot) => {
+            // Рендерим только видимые маркеры (с запасом 30%) или выбранный склад
+            if (bounds.contains(depot.coord) || depot.code === selectedDepotCode) {
+              const marker = L.marker(depot.coord, { icon: getDepotIcon(depot.code) })
+                .addTo(map);
+              marker.on('click', () => {
+                showDepotDetails(depot.code, depot.address, depot.coord, marker);
+              });
+              depotMarkers.push(marker);
+            }
+          });
+        } else {
+          // Группировка точек по ячейкам сетки
+          const clusters = {};
+
+          allDepotsData.forEach((depot) => {
+            // Группируем только видимые маркеры (с запасом 30%) или выбранный склад
+            if (bounds.contains(depot.coord) || depot.code === selectedDepotCode) {
+              const latCell = Math.floor(depot.coord[0] / gridSize);
+              const lngCell = Math.floor(depot.coord[1] / gridSize);
+              const cellKey = `${latCell}_${lngCell}`;
+
+              if (!clusters[cellKey]) {
+                clusters[cellKey] = [];
+              }
+              clusters[cellKey].push(depot);
+            }
+          });
+
+          // Отрисовываем маркеры (кластеры или индивидуальные)
+          for (const [key, depots] of Object.entries(clusters)) {
+            if (depots.length === 1) {
+              const depot = depots[0];
+              const marker = L.marker(depot.coord, { icon: getDepotIcon(depot.code) })
+                .addTo(map);
+              marker.on('click', () => {
+                showDepotDetails(depot.code, depot.address, depot.coord, marker);
+              });
+              depotMarkers.push(marker);
+            } else {
+              // Кластер нескольких складов
+              let sumLat = 0;
+              let sumLng = 0;
+              depots.forEach(d => {
+                sumLat += d.coord[0];
+                sumLng += d.coord[1];
+              });
+              const avgCoord = [sumLat / depots.length, sumLng / depots.length];
+
+              const clusterIcon = L.divIcon({
+                className: 'custom-cluster-marker',
+                html: `<div class="cluster-marker-badge">${depots.length}</div>`,
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
+              });
+
+              const marker = L.marker(avgCoord, { icon: clusterIcon })
+                .addTo(map)
+                .on('click', () => {
+                  // При клике плавно приближаем карту к кластеру
+                  map.setView(avgCoord, zoom + 2);
+                });
+              depotMarkers.push(marker);
+            }
+          }
+        }
+
+        // Скрываем склады под пином пользователя
+        if (userMarker) {
+          filterDepotsNearUser(userMarker.getLatLng());
+        }
+      }
+
+      // Вывод всех европейских складов на карту из прегенерированных данных
+      function initAllDepots() {
+        updateClusters();
+      }
+
+      // Инициализация карты
+      function initMap(langCode) {
+        const data = countryMapData[langCode] || countryMapData['UK'];
+        
+        // Берем случайный адрес для старта пользователя в этой стране
+        const randomAddrIdx = Math.floor(Math.random() * data.addresses.length);
+        const userLoc = data.addresses[randomAddrIdx];
+        
+        const isDark = document.body.classList.contains('dark-theme');
+        const tileUrl = isDark 
+          ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+          : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
+        // Создаем карту Leaflet с поддержкой зума жестами (pinch)
+        map = L.map('map-element', {
+          zoomControl: true,
+          scrollWheelZoom: false, // Отключаем стандартный зум колесиком мыши (он мешает скроллу)
+          touchZoom: true,        // Включаем щипок (pinch-to-zoom)
+          dragging: true
+        }).setView(userLoc.coord, 14);
+
+        L.tileLayer(tileUrl, {
+          maxZoom: 19,
+          subdomains: 'abcd',
+          attribution: '&copy; CARTO'
+        }).addTo(map);
+
+        // Ставим некликабельный маркер пользователя (interactive: false)
+        userMarker = L.marker(userLoc.coord, { icon: userIcon, interactive: false })
+          .addTo(map);
+
+        // Инициализируем всю европейскую сеть складов один раз
+        initAllDepots();
+
+        // Обновляем кластеризацию при изменении масштаба или перетаскивании карты
+        map.on('zoomend moveend', updateClusters);
+
+        // Скрываем склад, который совпадает с координатами пользователя, чтобы иконка была видна
+        filterDepotsNearUser(userLoc.coord);
+
+        // Кнопка возврата к местоположению пользователя
+        const recenterBtn = document.getElementById('map-recenter-btn');
+        if (recenterBtn) {
+          recenterBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (map && userMarker) {
+              map.flyTo(userMarker.getLatLng(), 14, { duration: 1 });
+            }
+          });
+        }
+
+        // Обработчик жеста Pinch-to-zoom на тачпаде
+        let zoomAccumulator = 0;
+        const mapContainer = document.getElementById('map-element');
+        
+        mapContainer.addEventListener('wheel', function(e) {
+          if (e.ctrlKey) {
+            // Разрешаем только щипок (Pinch-to-zoom)
+            e.preventDefault();
+            zoomAccumulator -= e.deltaY * 0.02;
+            if (Math.abs(zoomAccumulator) >= 1) {
+              const zoomDiff = Math.round(zoomAccumulator);
+              const currentZoom = map.getZoom();
+              const newZoom = Math.min(Math.max(currentZoom + zoomDiff, 1), 19);
+              if (newZoom !== currentZoom) {
+                map.setZoom(newZoom);
+              }
+              zoomAccumulator = 0;
+            }
+          } else {
+            // Обычный скролл двумя пальцами прокручивает страницу, а не карту
+          }
+        }, { passive: false });
+      }
+
+      // Обновление фокуса карты при выборе другой страны
+      function updateMap(langCode) {
+        if (!map) return;
+
+        // Закрываем панель с инфой о складе при смене страны
+        const depotPanel = document.getElementById('depot-info-panel');
+        if (depotPanel) depotPanel.classList.remove('visible');
+
+        const data = countryMapData[langCode] || countryMapData['UK'];
+        
+        const randomAddrIdx = Math.floor(Math.random() * data.addresses.length);
+        const userLoc = data.addresses[randomAddrIdx];
+
+        // Перелетаем на координаты пользователя в новой стране
+        map.flyTo(userLoc.coord, 14, { duration: 1.5 });
+
+        // Перемещаем маркер пользователя
+        userMarker.setLatLng(userLoc.coord);
+
+        // Скрываем склад под новым положением пользователя
+        filterDepotsNearUser(userLoc.coord);
+      }
+
+      // Переключение стилей тайлов при смене темы сайта
+      function updateMapTiles(isDark) {
+        if (!map) return;
+
+        map.eachLayer(layer => {
+          if (layer instanceof L.TileLayer) {
+            map.removeLayer(layer);
+          }
+        });
+
+        const tileUrl = isDark 
+          ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+          : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
+        L.tileLayer(tileUrl, {
+          maxZoom: 19,
+          subdomains: 'abcd',
+          attribution: '&copy; CARTO'
+        }).addTo(map);
+      }
+
+      // 7. I18n Engine Function
+      function changeLanguage(langCode) {
+        if (!translations[langCode]) return;
+        
+        // Update trigger button label
+        const langBtn = document.querySelector('.lang-btn');
+        if (langBtn) {
+          // Keep the inline SVG arrow, change only the text node
+          const textNode = langBtn.childNodes[0];
+          if (textNode) {
+            textNode.textContent = langCode + ' ';
+          }
+        }
+
+        // Update active class in dropdown options
+        document.querySelectorAll('.lang-opt').forEach(opt => {
+          if (opt.getAttribute('data-lang') === langCode) {
+            opt.classList.add('active');
+          } else {
+            opt.classList.remove('active');
+          }
+        });
+
+        // Update elements with data-i18n-key
+        document.querySelectorAll('[data-i18n-key]').forEach(el => {
+          const key = el.getAttribute('data-i18n-key');
+          const translatedText = translations[langCode][key];
+          if (translatedText) {
+            el.textContent = translatedText;
+          }
+        });
+
+        // Update navigation links data-text attribute to prevent hover layout shift
+        document.querySelectorAll('[data-i18n-link]').forEach(link => {
+          const keySpan = link.querySelector('[data-i18n-key]');
+          if (keySpan) {
+            const key = keySpan.getAttribute('data-i18n-key');
+            const translatedText = translations[langCode][key];
+            if (translatedText) {
+              link.setAttribute('data-text', translatedText);
+            }
+          }
+        });
+
+        // Update map focus if map is already active
+        if (map) {
+          updateMap(langCode);
+        }
+
+        // Recalculate layout to maintain 16px gap and 8px margins
+        if (typeof adjustHeroLayout === 'function') {
+          adjustHeroLayout();
+        }
+
+        // Rescale about text since different languages have different text lengths
+        if (typeof scaleAboutText === 'function') {
+          // Slight delay to let i18n DOM update complete
+          setTimeout(scaleAboutText, 30);
+        }
+      }
+
+      // 8. Language Selection Click Handlers
+      const langContainer = document.querySelector('.lang-selector-container');
+      const langBtn = document.querySelector('.lang-btn');
+
+      if (langBtn && langContainer) {
+        langBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isExpanded = langBtn.getAttribute('aria-expanded') === 'true';
+          langBtn.setAttribute('aria-expanded', !isExpanded);
+          langContainer.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+          langBtn.setAttribute('aria-expanded', 'false');
+          langContainer.classList.remove('active');
+        });
+      }
+
+      // Option selection handler
+      document.querySelectorAll('.lang-opt').forEach(opt => {
+        opt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const selectedLang = opt.getAttribute('data-lang');
+          localStorage.setItem('lang', selectedLang);
+          changeLanguage(selectedLang);
+          if (langBtn && langContainer) {
+            langBtn.setAttribute('aria-expanded', 'false');
+            langContainer.classList.remove('active');
+          }
+        });
+      });
+
+      // Initial language selection matching localStorage
+      const savedLang = localStorage.getItem('lang') || 'UK';
+      changeLanguage(savedLang);
+
+      // 9. Map trigger morph click handler
+      const mapTriggerArea = document.getElementById('map-trigger-area');
+      const mapCollapseBtn = document.getElementById('map-collapse-btn');
+      const mapLoadingOverlay = document.getElementById('map-loading-overlay');
+      
+      if (mapTriggerArea) {
+        mapTriggerArea.addEventListener('click', (e) => {
+          // If already expanded or clicking the collapse button, do nothing
+          if (e.target.closest('#map-collapse-btn')) return;
+          if (mapTriggerArea.classList.contains('expanded')) return;
+          
+          // Show loading overlay immediately
+          mapTriggerArea.classList.add('map-loading');
+          mapTriggerArea.classList.add('expanded');
+          
+          // Wait for the CSS expand animation (1s), then init map
+          setTimeout(() => {
+            const activeLang = document.querySelector('.lang-opt.active')?.getAttribute('data-lang') || 'UK';
+            if (!map) {
+              initMap(activeLang);
+              // Once map tiles start loading, invalidate size
+              setTimeout(() => {
+                if (map) {
+                  map.invalidateSize();
+                  // Hide loading overlay once map is ready
+                  map.once('load', () => {
+                    mapTriggerArea.classList.remove('map-loading');
+                  });
+                  // Fallback: hide overlay after max 2.5s
+                  setTimeout(() => mapTriggerArea.classList.remove('map-loading'), 2500);
+                }
+              }, 80);
+            } else {
+              map.invalidateSize();
+              // Already loaded — hide overlay quickly
+              setTimeout(() => mapTriggerArea.classList.remove('map-loading'), 300);
+            }
+          }, 1020);
+        });
+      }
+      
+      if (mapCollapseBtn && mapTriggerArea) {
+        mapCollapseBtn.addEventListener('click', (e) => {
+          e.stopPropagation(); // Prevent trigger area from re-expanding
+          // Reset depot selection if active
+          closeDepotDetails();
+          // Ensure loading overlay is hidden before collapsing
+          mapTriggerArea.classList.remove('map-loading');
+          mapTriggerArea.classList.remove('expanded');
+        });
+      }
+
+      // 10. Theme Switcher Click Handler
+      const themeToggleBtn = document.querySelector('.theme-toggle-btn');
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          document.body.classList.toggle('dark-theme');
+          const isDark = document.body.classList.contains('dark-theme');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          
+          // Dynamically swap map tiles synchronously with theme toggle
+          if (map) {
+            updateMapTiles(isDark);
+          }
+        });
+      }
+
+      // 11. Dynamic Layout Sizing Engine (16px gap, 8px page margins)
+      function adjustHeroLayout() {
+        const infoContainer = document.querySelector('.hero-info-container');
+        const logoSvg = document.querySelector('.hero-logo-svg');
+        if (!infoContainer || !logoSvg) return;
+        
+        const currentLogoHeight = logoSvg.getBoundingClientRect().height;
+        if (!currentLogoHeight || currentLogoHeight <= 0) return;
+        
+        const currentLogoWidth = logoSvg.getBoundingClientRect().width;
+        const currentTextWidth = infoContainer.getBoundingClientRect().width;
+        
+        const viewportWidth = document.documentElement.clientWidth;
+        const viewportHeight = window.innerHeight;
+        
+        // S represents the combined width of the logo and text relative to the logo height (the aspect ratio/ratio sum)
+        const S = (currentLogoWidth + currentTextWidth) / currentLogoHeight;
+        if (S <= 0) return;
+        
+        // Target logo height to exactly fill the screen width minus 24px (8px gap + 8px left margin + 8px right margin)
+        const finalLogoHeight = (viewportWidth - 24) / S;
+        
+        const heroSection = document.getElementById('hero-section');
+        if (heroSection) {
+          const minFontSize = viewportWidth <= 768 ? (viewportWidth <= 480 ? 9 : 10) : 12;
+          const finalFontSize = Math.max(finalLogoHeight * 0.0615, minFontSize);
+          
+          heroSection.style.setProperty('--hero-logo-height', `${finalLogoHeight}px`);
+          heroSection.style.setProperty('--hero-font-size', `${finalFontSize}px`);
+        }
+      }
+      
+      // Debounce utility to prevent layout thrashing on window resize
+      function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+      }
+
+      const debouncedResize = debounce(() => {
+        adjustHeroLayout();
+        scaleAboutText();
+      }, 100);
+
+      window.addEventListener('resize', debouncedResize);
+      window.addEventListener('load', () => {
+        adjustHeroLayout();
+        scaleAboutText();
+      });
+      adjustHeroLayout();
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          adjustHeroLayout();
+          scaleAboutText();
+        });
+      }
+
+      // 12. About Text — Binary-search font size to fill exactly 3 lines
+      function scaleAboutText() {
+        const aboutEl = document.querySelector('.about-text');
+        const blockEl = document.querySelector('.about-text-block');
+        if (!aboutEl || !blockEl) return;
+
+        const TARGET_LINES = 3;
+
+        // Helper: count rendered lines by measuring text height
+        function countLines(fontSize) {
+          aboutEl.style.fontSize = fontSize + 'px';
+          const range = document.createRange();
+          range.selectNodeContents(aboutEl);
+          const rects = range.getClientRects();
+          const lineYPositions = [];
+          for (const rect of rects) {
+            const midY = Math.round(rect.top + rect.height / 2);
+            if (!lineYPositions.some(y => Math.abs(y - midY) < 2)) {
+              lineYPositions.push(midY);
+            }
+          }
+          return lineYPositions.length || Math.round(aboutEl.scrollHeight / fontSize);
+        }
+
+        let lo = 12, hi = 300, bestSize = lo;
+        for (let i = 0; i < 25; i++) {
+          const mid = (lo + hi) / 2;
+          const lines = countLines(mid);
+          if (lines <= TARGET_LINES) {
+            bestSize = mid;
+            lo = mid;
+          } else {
+            hi = mid;
+          }
+        }
+        aboutEl.style.fontSize = bestSize + 'px';
+      }
+
+      // 13. About section naturally slides over sticky hero — no JS animation needed.
+      setTimeout(() => {
+        adjustHeroLayout();
+        scaleAboutText();
+      }, 100);
+
+      // 14. Country vector slideshow animation
+      const countriesList = ['AT', 'BA', 'BE', 'BG', 'CH', 'CR', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FR', 'FI', 'GR', 'HU', 'IE', 'IT', 'LT', 'LV', 'NL', 'NO', 'PL', 'PT', 'RO', 'RS', 'SE', 'SI', 'SK', 'UK'];
+      let currentCountryIdx = countriesList.indexOf('DE');
+      if (currentCountryIdx === -1) currentCountryIdx = 0;
+      const countryImgEl = document.getElementById('about-active-country-img');
+      
+      // Preload images in memory to prevent layout/loading lag
+      const preloadedSvgImages = {};
+      countriesList.forEach(code => {
+        preloadedSvgImages[code] = new Image();
+        preloadedSvgImages[code].src = `vector/countries/SVG/${code}.svg`;
+      });
+
+      function rotateCountry() {
+        if (!countryImgEl) return;
+        currentCountryIdx = (currentCountryIdx + 1) % countriesList.length;
+        const nextCountry = countriesList[currentCountryIdx];
+        
+        countryImgEl.src = `vector/countries/SVG/${nextCountry}.svg`;
+      }
+      
+      if (countryImgEl) {
+        setInterval(rotateCountry, 1000);
+      }
+
+      // 15. Mobile Menu Drawer Toggle Logic
+      const burgerBtn = document.querySelector('.burger-menu-btn');
+      const closeBtn = document.querySelector('.close-drawer-btn');
+      const drawer = document.getElementById('mobile-menu-drawer');
+      
+      if (burgerBtn && drawer) {
+        burgerBtn.addEventListener('click', () => {
+          drawer.classList.add('active');
+          burgerBtn.setAttribute('aria-expanded', 'true');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+      
+      if (closeBtn && drawer) {
+        closeBtn.addEventListener('click', () => {
+          drawer.classList.remove('active');
+          if (burgerBtn) burgerBtn.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      }
+      
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          drawer.classList.remove('active');
+          if (burgerBtn) burgerBtn.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
